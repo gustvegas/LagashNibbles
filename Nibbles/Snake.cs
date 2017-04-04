@@ -3,7 +3,7 @@ namespace Nibbles
     using System;
     using System.Collections.Generic;
     
-    public class Snake : Vector, ISnake
+    class Snake : Vector, ISnake
     {
         private static byte Count = 1;
 
@@ -25,7 +25,7 @@ namespace Nibbles
             Length = 1;
         }
 
-        public byte Id { get; }
+        public int Id { get; set; }
 
         public int Length { get; set;}
 
@@ -60,7 +60,7 @@ namespace Nibbles
             Move(Direction);
         }
 
-        public bool WillHitNextStep(byte[,] space)
+        public bool WillHitNextStep(int[,] space)
         {
             Position pos = MoveNew(Direction);
             if(pos.IsValid(space.GetUpperBound(0), space.GetUpperBound(1))
@@ -71,7 +71,7 @@ namespace Nibbles
             return true;
         }
 
-        public int WillHitNextStepInfo(byte[,] space)
+        public int WillHitNextStepInfo(int[,] space)
         {
             Position pos = MoveNew(Direction);
             if(!pos.IsValid(space.GetUpperBound(0), space.GetUpperBound(1)))

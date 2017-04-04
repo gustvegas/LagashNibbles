@@ -14,11 +14,19 @@ namespace Nibbles
 
         public int Ticks = 0;
 
-        byte[,] space;
+        int[,] space;
 
-        public List<Snake> snakes;
+        List<Snake> snakes;
 
-        public Snake Loser;
+        Snake Loser;
+
+        public int LoserId
+        {
+            get
+            {
+                return Loser.Id;
+            }
+        }
 
         void PrintSnakes(List<Snake> snakes)
         {
@@ -28,30 +36,30 @@ namespace Nibbles
             }
         }
 
-        public void SetupTwoRandom()
+        public void SetupClean()
         {
-            snakes = new List<Snake>{ 
-                new Snake{ Behavior = new DiegoGBehavior(), },
-                new Snake{ Behavior = new DiegoGBehavior(), },
-            };
-            SetupAdjust();
+            snakes = new List<Snake>();
         }
 
-        public void SetupFourRandom()
+        public void SetupAddSnake(int x, int y, Direction direction)
         {
-            snakes = new List<Snake>{ 
-                new Snake{ Behavior = new DiegoGBehavior(), },
-                new Snake{ Behavior = new DiegoGBehavior(), },
-                new Snake{ Behavior = new DiegoGBehavior(), },
-                new Snake{ Behavior = new DiegoGBehavior(), },
-            };
-            SetupAdjust();   
+            var snake = new Snake{ Id = snakes.Count+1, X = x, Y = y, Direction = direction, Behavior = new DiegoGBehavior(), };
+            snakes.Add(snake);
+        }
+
+        public void SetupRandom(int qty)
+        {
+            snakes = new List<Snake>();
+            for(var i = 0; i < qty; i++)
+            {
+                snakes.Add(new Snake{ Behavior = new DiegoGBehavior(), });
+            }
         }
 
         public void SetupAdjust()
         {
             Loser = null;
-            space = new byte[SPACE_X, SPACE_Y];
+            space = new int[SPACE_X, SPACE_Y];
             // Place snakes in space
             var rand = new Random();
             foreach(var snake in snakes)
@@ -75,10 +83,11 @@ namespace Nibbles
             }
         }
 
+
         public void MainLoop(bool debug)
         {
             Loser = null;
-            space = new byte[SPACE_X, SPACE_Y];
+            space = new int[SPACE_X, SPACE_Y];
             var newSpace = new Space(space);
             foreach(var snake in snakes)
             {

@@ -9,24 +9,22 @@ namespace Nibbles.Tests
         public void x6y6N_x6y5W()
         {
             Game game = new Game();
-            game.snakes = new List<Snake>{ 
-                new Snake{ X=6, Y=6, Direction= Direction.North, Behavior = new DiegoGBehavior(), },
-                new Snake{ X=6, Y=5, Direction= Direction.West, Behavior = new DiegoGBehavior(), },
-            };
+            game.SetupClean();
+            game.SetupAddSnake(6,6,Direction.North);
+            game.SetupAddSnake(6,5,Direction.North);
             game.MainLoop(false);
-            Assert.Equal(game.snakes[1].Id, game.Loser.Id);
+            Assert.Equal(2, game.LoserId);
         }
 
         [Fact]
         public void x0y0E_x9y9W()
         {
             Game game = new Game();
-            game.snakes = new List<Snake>{ 
-                new Snake{ X=0, Y=0, Direction= Direction.East, Behavior = new DiegoGBehavior(), },
-                new Snake{ X=9, Y=9, Direction= Direction.West, Behavior = new DiegoGBehavior(), },
-            };
+            game.SetupClean();
+            game.SetupAddSnake(0,0,Direction.East);
+            game.SetupAddSnake(9,9,Direction.West);
             game.MainLoop(false);
-            Assert.Equal(game.snakes[1].Id, game.Loser.Id);
+            Assert.Equal(2, game.LoserId);
         }
     }
 }

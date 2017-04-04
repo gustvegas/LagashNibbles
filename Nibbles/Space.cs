@@ -4,14 +4,14 @@ namespace Nibbles
 
     public class Space
     {
-        byte[,] space;
+        int[,] space;
 
-        public Space(byte[,] space)
+        public Space(int[,] space)
         {
             this.space = space;
         }
 
-        public byte this[int x, int y]
+        public int this[int x, int y]
         {
             get
             {

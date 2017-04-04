@@ -3,7 +3,7 @@ namespace Nibbles
     using System.Collections.Generic;
     public interface ISnake
     {
-        byte Id { get; }
+        int Id { get; }
 
         int Ticks { get; }
 
