@@ -20,75 +20,45 @@ namespace Nibbles
 
         public Snake Loser;
 
-        void PrintSpace(byte[,] space)
-        {
-            Console.WriteLine();
-            for(var x = 0; x <= space.GetUpperBound(0); x++)
-            {
-                for(var y = 0; y <= space.GetUpperBound(0); y++)
-                {
-                    Console.Write(" ");
-                    Console.Write(space[x,y]);
-                }
-                Console.WriteLine();
-            }
-        }
-
         void PrintSnakes(List<Snake> snakes)
         {
             foreach(var snake in snakes)
             {
-                Console.WriteLine($"  {snake.Id}:({Ticks}): x:{snake.X}, y:{snake.Y}, {snake.Direction}, l:{snake.Length}");
-                foreach(var vec in snake.Trail)
-                {
-                    Console.WriteLine($"\t{vec.X}, {vec.Y} {vec.Direction}");
-                }
+                snake.PrintSnake();
             }
         }
 
         public void SetupTwoRandom()
         {
-            Loser = null;
-            space = new byte[SPACE_X, SPACE_Y];
             snakes = new List<Snake>{ 
                 new Snake{ Behavior = new DiegoGBehavior(), },
                 new Snake{ Behavior = new DiegoGBehavior(), },
             };
-            
-            // Place snakes in space
-            var rand = new Random();
-            foreach(var snake in snakes)
-            {
-                snake.X = rand.Next(space.GetUpperBound(0)+1);
-                snake.Y = rand.Next(space.GetUpperBound(1)+1);
-                snake.Direction = (Direction)rand.Next(4);
-
-                // If snake placed in borders ensure a safe direction
-                while(snake.WillHitNextStep(space))
-                {
-                    snake.Direction = (Direction)rand.Next(4);
-                }
-            }
+            SetupAdjust();
         }
 
         public void SetupFourRandom()
         {
-            Loser = null;
-            space = new byte[SPACE_X, SPACE_Y];
             snakes = new List<Snake>{ 
                 new Snake{ Behavior = new DiegoGBehavior(), },
                 new Snake{ Behavior = new DiegoGBehavior(), },
                 new Snake{ Behavior = new DiegoGBehavior(), },
                 new Snake{ Behavior = new DiegoGBehavior(), },
             };
-            
+            SetupAdjust();   
+        }
+
+        public void SetupAdjust()
+        {
+            Loser = null;
+            space = new byte[SPACE_X, SPACE_Y];
             // Place snakes in space
             var rand = new Random();
             foreach(var snake in snakes)
             {
-                snake.X = rand.Next(space.GetUpperBound(0)+1);
-                snake.Y = rand.Next(space.GetUpperBound(1)+1);
-                snake.Direction = (Direction)rand.Next(4);
+                snake.X = rand.Next(SPACE_X);
+                snake.Y = rand.Next(SPACE_Y);
+                snake.Direction = (Direction)rand.Next(3);
 
                 // If snake placed in borders ensure a safe direction
                 foreach(Direction dir in new[]{0,1,2,3})
@@ -96,6 +66,10 @@ namespace Nibbles
                     if(snake.WillHitNextStep(space))
                     {
                         snake.Direction = dir;
+                    }
+                    else
+                    {
+                        break;
                     }
                 }
             }
@@ -105,6 +79,7 @@ namespace Nibbles
         {
             Loser = null;
             space = new byte[SPACE_X, SPACE_Y];
+            var newSpace = new Space(space);
             foreach(var snake in snakes)
             {
                 space[snake.X,snake.Y] = snake.Id;
@@ -112,6 +87,7 @@ namespace Nibbles
             PrintSnakes(snakes);
 
             bool hit = false;
+            int idx = 0;
             while(!hit)
             {
                 Ticks++;
@@ -119,19 +95,19 @@ namespace Nibbles
                 {
                     if(debug)
                     {
-                        PrintSpace(space);
+                        newSpace.PrintSpace();
                         PrintSnakes(snakes);
                     }
-                    var newDir = snake.Behavior.ChangeDirection(snake, space, snakes.Select( s => (ISnake)s ).ToList() );
+                    var newDir = snake.Behavior.ChangeDirection(snake, newSpace, snakes.Select( s => (ISnake)s ).ToList() );
                     snake.ChangeDirection(newDir);
                     if(snake.WillHitNextStep(space))
                     {
                         Loser = snake;
-                        var idx = snake.WillHitNextStepInfo(space);
+                        idx = snake.WillHitNextStepInfo(space);
                         if(debug)
                         {
                             Console.WriteLine($"Hit: {snake.Id}:{idx}");
-                            PrintSpace(space);
+                            newSpace.PrintSpace();
                             PrintSnakes(snakes);
                         }
                         hit = true;
@@ -148,7 +124,7 @@ namespace Nibbles
                     }
                 }
             }
-            Console.WriteLine($"Winner: {Loser.Id}");
+            Console.WriteLine($"Loser: {Loser.Id} hit " + (idx == -1 ? "wall" : idx.ToString()));
         }       
     }
 }

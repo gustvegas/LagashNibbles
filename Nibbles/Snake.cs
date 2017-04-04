@@ -1,5 +1,6 @@
 namespace Nibbles
 {
+    using System;
     using System.Collections.Generic;
     
     public class Snake : Vector, ISnake
@@ -78,6 +79,15 @@ namespace Nibbles
                 return -1;
             }
             return space[pos.X, pos.Y];
+        }
+
+        public void PrintSnake()
+        {
+            Console.WriteLine($"  {Id}:({Ticks}): x:{X}, y:{Y}, {Direction}, l:{Length}");
+            foreach(var vec in Trail)
+            {
+                Console.WriteLine($"\t{vec.X}, {vec.Y} {vec.Direction}");
+            }
         }
     }
 }
