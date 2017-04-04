@@ -7,15 +7,15 @@ namespace Nibbles
 
         int Ticks { get; }
 
-        int X {get;set;}
+        int X { get; }
         
-        int Y {get;set;}
+        int Y { get; }
 
-        Direction Direction {get;set;}
+        Direction Direction { get; }
 
         List<Vector> Trail { get; }
 
-        int Length { get; set; }
+        int Length { get; }
 
         Position MoveNew(Direction direction);
     }

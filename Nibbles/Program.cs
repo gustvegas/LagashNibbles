@@ -8,14 +8,13 @@ namespace Nibbles
         public static void Main(string[] args)
         {
             Console.WriteLine("Nibbles!");
-            Console.Write('\u2190');
-            Console.Write('\u2191');
-            Console.Write('\u2192');
-            Console.Write('\u2193');
-            Console.WriteLine();
+            // Console.Write('\u2190');
+            // Console.Write('\u2191');
+            // Console.Write('\u2192');
+            // Console.Write('\u2193');
             var game = new Game();
             game.SetupFourRandom();
-            game.MainLoop();
+            game.MainLoop(false);
         }
     }
 
