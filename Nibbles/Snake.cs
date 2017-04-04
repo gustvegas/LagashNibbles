@@ -11,7 +11,7 @@ namespace Nibbles
 
         public ISnakeBehavior Behavior { get; set; }
 
-        public List<Vector> Trail { get; set; }
+        public IList<Vector> Trail { get; set; }
 
         public int Ticks
         { 
@@ -60,10 +60,10 @@ namespace Nibbles
             Move(Direction);
         }
 
-        public bool WillHitNextStep(int[,] space)
+        public bool WillHitNextStep(Space space)
         {
             Position pos = MoveNew(Direction);
-            if(pos.IsValid(space.GetUpperBound(0), space.GetUpperBound(1))
+            if(pos.IsValid(space.TopX, space.TopY)
                && (space[pos.X, pos.Y] == 0))
             {
                 return false;
@@ -71,10 +71,10 @@ namespace Nibbles
             return true;
         }
 
-        public int WillHitNextStepInfo(int[,] space)
+        public int WillHitNextStepInfo(Space space)
         {
             Position pos = MoveNew(Direction);
-            if(!pos.IsValid(space.GetUpperBound(0), space.GetUpperBound(1)))
+            if(!pos.IsValid(space.TopX, space.TopY))
             {
                 return -1;
             }

@@ -10,11 +10,11 @@ namespace Nibbles
         
         int SPACE_Y = 10;
 
+        Space space;
+
         int REDUCE_STEP = 5;
 
         public int Ticks = 0;
-
-        int[,] space;
 
         List<Snake> snakes;
 
@@ -54,12 +54,8 @@ namespace Nibbles
             {
                 snakes.Add(new Snake{ Behavior = new DiegoGBehavior(), });
             }
-        }
-
-        public void SetupAdjust()
-        {
             Loser = null;
-            space = new int[SPACE_X, SPACE_Y];
+            space = new Space(SPACE_X, SPACE_Y);
             // Place snakes in space
             var rand = new Random();
             foreach(var snake in snakes)
@@ -83,12 +79,10 @@ namespace Nibbles
             }
         }
 
-
         public void MainLoop(bool debug)
         {
             Loser = null;
-            space = new int[SPACE_X, SPACE_Y];
-            var newSpace = new Space(space);
+            space = new Space(SPACE_X, SPACE_Y);
             foreach(var snake in snakes)
             {
                 space[snake.X,snake.Y] = snake.Id;
@@ -104,10 +98,10 @@ namespace Nibbles
                 {
                     if(debug)
                     {
-                        newSpace.PrintSpace();
+                        space.PrintSpace();
                         PrintSnakes(snakes);
                     }
-                    var newDir = snake.Behavior.ChangeDirection(snake, newSpace, snakes.Select( s => (ISnake)s ).ToList() );
+                    var newDir = snake.Behavior.ChangeDirection(snake, space, snakes.Select( s => (ISnake)s ).ToList() );
                     snake.ChangeDirection(newDir);
                     if(snake.WillHitNextStep(space))
                     {
@@ -116,7 +110,7 @@ namespace Nibbles
                         if(debug)
                         {
                             Console.WriteLine($"Hit: {snake.Id}:{idx}");
-                            newSpace.PrintSpace();
+                            space.PrintSpace();
                             PrintSnakes(snakes);
                         }
                         hit = true;

@@ -13,7 +13,7 @@ namespace Nibbles
 
         Direction Direction { get; }
 
-        List<Vector> Trail { get; }
+        IList<Vector> Trail { get; }
 
         int Length { get; }
 

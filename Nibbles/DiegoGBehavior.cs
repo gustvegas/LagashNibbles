@@ -5,7 +5,7 @@ namespace Nibbles
 
     public class DiegoGBehavior : ISnakeBehavior
     {
-        public Direction ChangeDirection(ISnake snake, Space space, List<ISnake> snakes)
+        public Direction ChangeDirection(ISnake snake, ISpace space, List<ISnake> snakes)
         {
             Position pos = snake.MoveNew(snake.Direction);
             if(pos.IsValid(space.TopX, space.TopY)

@@ -2,13 +2,13 @@ namespace Nibbles
 {
     using System;
 
-    public class Space
+    class Space : ISpace
     {
         int[,] space;
 
-        public Space(int[,] space)
+        public Space(int x, int y)
         {
-            this.space = space;
+            this.space = new int[x,y];
         }
 
         public int this[int x, int y]
@@ -16,6 +16,10 @@ namespace Nibbles
             get
             {
                 return space[x,y];
+            }
+            set
+            {
+                space[x,y] = value;
             }
         }
 
