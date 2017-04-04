@@ -13,11 +13,11 @@ namespace Nibbles
 
         Direction Direction { get; }
 
-        IList<Vector> Trail { get; }
+        IReadOnlyCollection<IVector> Trail { get; }
 
         int Length { get; }
 
-        Position MoveNew(Direction direction);
+        IPosition MoveNew(Direction direction);
     }
 
 }

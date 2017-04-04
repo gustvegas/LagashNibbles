@@ -6,19 +6,19 @@ namespace Nibbles
 
     public class Game
     {
-        int SPACE_X = 10;
+        private int SPACE_X = 10;
         
-        int SPACE_Y = 10;
+        private int SPACE_Y = 10;
 
-        Space space;
+        private Space space;
 
-        int REDUCE_STEP = 5;
+        private int REDUCE_STEP = 5;
 
-        public int Ticks = 0;
+        private int Ticks = 0;
 
-        List<Snake> snakes;
+        private List<Snake> snakes;
 
-        Snake Loser;
+        private Snake Loser;
 
         public int LoserId
         {
@@ -101,7 +101,7 @@ namespace Nibbles
                         space.PrintSpace();
                         PrintSnakes(snakes);
                     }
-                    var newDir = snake.Behavior.ChangeDirection(snake, space, snakes.Select( s => (ISnake)s ).ToList() );
+                    var newDir = snake.Behavior.ChangeDirection(snake, space, snakes.Select( s => (ISnake)s ).ToList().AsReadOnly() );
                     snake.ChangeDirection(newDir);
                     if(snake.WillHitNextStep(space))
                     {
@@ -120,7 +120,7 @@ namespace Nibbles
                     space[snake.X, snake.Y] = snake.Id;
                     if(Ticks % REDUCE_STEP == 0)
                     {
-                        Vector first = snake.Trail.First();
+                        IVector first = snake.Trail.First();
                         Vector initial = new Vector{X=first.X, Y=first.Y, Direction=first.Direction};
                         snake.ReduceLength(1);
                         space[initial.X, initial.Y] = 0;

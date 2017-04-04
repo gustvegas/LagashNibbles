@@ -8,8 +8,8 @@ namespace Nibbles
         West, 
     }
 
-    public class Vector : Position
+    class Vector : Position, IVector
     {
-        public Direction Direction {get;set;}
+        public Direction Direction { get; set; }
     }
 }

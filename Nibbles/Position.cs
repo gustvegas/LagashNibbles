@@ -1,10 +1,10 @@
 namespace Nibbles
 {
-    public class Position
+    class Position : IPosition
     {
-        public int X {get; set;}
+        public int X { get; set; }
         
-        public int Y {get; set;}
+        public int Y { get; set; }
 
         public void Move(Direction direction)
         {
@@ -12,7 +12,7 @@ namespace Nibbles
             SetPosition(pos);
         }
 
-        public Position MoveNew(Direction direction)
+        public IPosition MoveNew(Direction direction)
         {
             var pos = new Position{ X = X, Y = Y };
             if(direction == Direction.North)
@@ -31,11 +31,12 @@ namespace Nibbles
             return pos;
         }
 
-        public void SetPosition(Position position)
+        public void SetPosition(IPosition position)
         {
             X = position.X;
             Y = position.Y;
         }
+
         public bool IsValid()
         {
             return (X >= 0) && (Y >= 0);
