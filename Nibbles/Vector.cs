@@ -14,7 +14,7 @@ namespace Nibbles
 
         public void Move()
         {
-            var pos = MoveNew(Direction);
+            var pos = MoveNew();
             SetPosition(pos);
         }
 
