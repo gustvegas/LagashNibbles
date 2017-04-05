@@ -7,7 +7,7 @@ namespace Nibbles
     {
         public Direction ChangeDirection(ISnake snake, ISpace space, IReadOnlyCollection<ISnake> snakes)
         {
-            IPosition pos = snake.MoveNew(snake.Direction);
+            IPosition pos = snake.MoveNew();
             if(pos.IsValid(space.TopX, space.TopY)
                && (space[pos.X, pos.Y] == 0))
             {

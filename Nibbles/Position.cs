@@ -6,31 +6,6 @@ namespace Nibbles
         
         public int Y { get; set; }
 
-        public void Move(Direction direction)
-        {
-            var pos = MoveNew(direction);
-            SetPosition(pos);
-        }
-
-        public IPosition MoveNew(Direction direction)
-        {
-            var pos = new Position{ X = X, Y = Y };
-            if(direction == Direction.North)
-            {
-                pos.X--;
-            }else if(direction == Direction.East)
-            {
-                pos.Y++;
-            }else if(direction == Direction.South)
-            {
-                pos.X++;                
-            }else if(direction == Direction.West)
-            {
-                pos.Y--;
-            }
-            return pos;
-        }
-
         public void SetPosition(IPosition position)
         {
             X = position.X;
