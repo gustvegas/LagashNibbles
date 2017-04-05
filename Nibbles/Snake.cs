@@ -50,7 +50,7 @@ namespace Nibbles
         public Vector ReduceLength(int count)
         {
             Length = Length - count;
-            Vector first = trail[0];
+            Vector first = trail.First();
             Vector second = Trail.Count > 1 ? trail[1] : null;
             var newFirst = first.MoveNew(first.Direction);
             first.SetPosition(newFirst);
@@ -66,7 +66,13 @@ namespace Nibbles
         {
             ticks++;
             Length++;
-            Move(Direction);
+            Move();
+        }
+
+        public Vector GetTailPosition()
+        {
+            Vector first = trail.First();
+            return new Vector{X=first.X, Y=first.Y, Direction=first.Direction};
         }
 
         public bool WillHitNextStep(Space space)

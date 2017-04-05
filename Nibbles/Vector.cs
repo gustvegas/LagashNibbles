@@ -12,9 +12,9 @@ namespace Nibbles
     {
         public Direction Direction { get; set; }
 
-        public void Move(Direction direction)
+        public void Move()
         {
-            var pos = MoveNew(direction);
+            var pos = MoveNew(Direction);
             SetPosition(pos);
         }
 

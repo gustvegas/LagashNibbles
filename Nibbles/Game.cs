@@ -120,8 +120,7 @@ namespace Nibbles
                     space[snake.X, snake.Y] = snake.Id;
                     if(Ticks % REDUCE_STEP == 0)
                     {
-                        IVector first = snake.Trail.First();
-                        Vector initial = new Vector{X=first.X, Y=first.Y, Direction=first.Direction};
+                        Vector initial = snake.GetTailPosition();
                         snake.ReduceLength(1);
                         space[initial.X, initial.Y] = 0;
                     }
