@@ -41,18 +41,18 @@ namespace Nibbles
             snakes = new List<Snake>();
         }
 
-        public void SetupAddSnake(int x, int y, Direction direction)
+        public void SetupAddSnake(int x, int y, Direction direction, ISnakeBehavior behavior)
         {
-            var snake = new Snake{ Id = snakes.Count+1, X = x, Y = y, Direction = direction, Behavior = new DiegoGBehavior(), };
+            var snake = new Snake{ Id = snakes.Count+1, X = x, Y = y, Direction = direction, Behavior = behavior, };
             snakes.Add(snake);
         }
 
-        public void SetupRandom(int qty)
+        public void SetupRandom(int qty, ISnakeBehavior behavior)
         {
             snakes = new List<Snake>();
             for(var i = 0; i < qty; i++)
             {
-                snakes.Add(new Snake{ Behavior = new DiegoGBehavior(), });
+                snakes.Add(new Snake{ Behavior = behavior, });
             }
             Loser = null;
             space = new Space(SPACE_X, SPACE_Y);

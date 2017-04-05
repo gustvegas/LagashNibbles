@@ -11,6 +11,13 @@
             ],
             "isBuildCommand": true,
             "problemMatcher": "$msCompile"
+        },
+        {
+            "taskName": "run",
+            "args": [
+                "${workspaceRoot}/Nibbles.Exe/Nibbles.Exe.csproj"
+            ],
+            "isBuildCommand": false
         }
     ]
 }

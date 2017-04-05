@@ -13,7 +13,7 @@ namespace Nibbles
             // Console.Write('\u2192');
             // Console.Write('\u2193');
             var game = new Game();
-            game.SetupRandom(4);
+            game.SetupRandom(4, new DiegoGBehavior());
             game.MainLoop(false);
         }
     }

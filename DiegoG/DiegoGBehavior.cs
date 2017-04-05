@@ -1,6 +1,5 @@
 namespace Nibbles
 {
-    using System;
     using System.Linq;
     using System.Collections.Generic;
 
@@ -15,7 +14,6 @@ namespace Nibbles
                 return snake.Direction;                
             }
             
-            //((Position)snakes.First()).X = 0;
             foreach(Direction dir in new[]{0,1,2,3})
             {
                 pos = snake.MoveNew(dir);
@@ -30,7 +28,6 @@ namespace Nibbles
                 return dir;
             }
             return snake.Direction;
-
             
             //TODO: no meterse en callejones
         }
