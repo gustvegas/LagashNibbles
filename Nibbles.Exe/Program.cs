@@ -14,7 +14,7 @@ namespace Nibbles
             // Console.Write('\u2193');
             var game = new Game();
             game.SetupRandom(4, new DiegoGBehavior());
-            game.MainLoop(false);
+            game.MainLoop(true);
         }
     }
 
