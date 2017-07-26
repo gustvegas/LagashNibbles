@@ -58,6 +58,7 @@ class Nibbles {
     }
     start() {
         for (let i = 0; i < 10; i++) {
+            this.update();
         }
     }
     update() {
