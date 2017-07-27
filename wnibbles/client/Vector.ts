@@ -1,5 +1,6 @@
+import {Pos} from './Pos';
 
-class Vector extends Pos {
+export class Vector extends Pos {
     direction: Direction;
 
     constructor() {

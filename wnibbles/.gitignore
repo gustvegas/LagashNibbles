@@ -3,3 +3,4 @@ js/*.map
 js/ts.js
 .tscache/
 dist/
+*.tmp.txt

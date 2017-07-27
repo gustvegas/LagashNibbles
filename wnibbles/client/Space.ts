@@ -1,5 +1,5 @@
 
-class Space {
+export class Space {
     topX: number;
     topY: number;
     

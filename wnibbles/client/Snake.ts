@@ -1,5 +1,9 @@
+import {Vector} from './Vector';
+import {Space} from './Space';
+import {ISnakeBehavior} from './ISnakeBehavior';
+import {Color} from './Nibbles';
 
-class Snake extends Vector {
+export class Snake extends Vector {
     id: number;
     ticks: number;
     trail: Array<Vector>;

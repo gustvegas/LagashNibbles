@@ -1,1 +1,0 @@
-src/Direction.ts src/Nibbles.ts src/Pos.ts src/routes/index.ts src/routes/route.ts src/server.ts src/Snake.ts src/Space.ts src/Vector.ts --removeComments --rootDir src --target ES6 --module commonjs --outDir ./dist

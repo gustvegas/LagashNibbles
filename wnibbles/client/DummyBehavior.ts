@@ -1,4 +1,8 @@
-class DummyBehavior implements ISnakeBehavior {
+import {ISnakeBehavior} from './ISnakeBehavior';
+import {Space} from './Space';
+import {Snake} from './Snake';
+
+export class DummyBehavior implements ISnakeBehavior {
     changeDirection(snake: Snake, space: Space, snakes: Array<Snake>) : Direction {
         // Si no me choco adelante, sigo igual
         let pos = snake.moveNew();
