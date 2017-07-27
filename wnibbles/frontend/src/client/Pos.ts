@@ -1,3 +1,4 @@
+import {Space} from './Space';
 
 export class Pos {
     x: number;
@@ -11,9 +12,9 @@ export class Pos {
         return (this.x >= 0) && (this.y >= 0);
     }
 
-    isValidInBounds(topX: number, topY: number) : boolean
+    isValidInBounds(space: Space) : boolean
     {
-        return this.isValid() && (this.x < topX) && (this.y < topY);
+        return this.isValid() && (this.x < space.topX) && (this.y < space.topY);
     }
 
 

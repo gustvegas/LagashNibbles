@@ -7,7 +7,7 @@ export class DummyBehavior implements ISnakeBehavior {
     changeDirection(snake: Snake, space: Space, snakes: Array<Snake>) : Direction {
         // Si no me choco adelante, sigo igual
         let pos = snake.moveNew();
-        if(pos.isValidInBounds(space.topX, space.topY)
+        if(pos.isValidInBounds(space)
             && (space.map[pos.x][pos.y] == space.EMPTY)) {
             return snake.direction;                
         }
@@ -19,7 +19,7 @@ export class DummyBehavior implements ISnakeBehavior {
                 continue;
             }
             pos = snake.moveNewDirection(dir);
-            if(!pos.isValidInBounds(space.topX, space.topY)) {
+            if(!pos.isValidInBounds(space)) {
                 continue;
             }
             if(space.map[pos.x][pos.y] != space.EMPTY) {

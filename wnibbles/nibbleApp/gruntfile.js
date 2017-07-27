@@ -23,13 +23,13 @@ module.exports = function(grunt) {
     ts: {
       app: {
         files: [{
-          src: ["src/\*\*/\*.ts", "!src/.baseDir.ts"],
+          src: ["src/\*\*/\*.ts"],
           dest: "./dist"
         }],
         options: {
           module: "commonjs",
           target: "es6",
-          sourceMap: false,
+          sourceMap: true,
           rootDir: "src"
         }
       }

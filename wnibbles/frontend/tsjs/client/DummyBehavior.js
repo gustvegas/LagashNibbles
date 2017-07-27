@@ -2,7 +2,7 @@ import { Direction } from './Direction';
 export class DummyBehavior {
     changeDirection(snake, space, snakes) {
         let pos = snake.moveNew();
-        if (pos.isValidInBounds(space.topX, space.topY)
+        if (pos.isValidInBounds(space)
             && (space.map[pos.x][pos.y] == space.EMPTY)) {
             return snake.direction;
         }
@@ -12,7 +12,7 @@ export class DummyBehavior {
                 continue;
             }
             pos = snake.moveNewDirection(dir);
-            if (!pos.isValidInBounds(space.topX, space.topY)) {
+            if (!pos.isValidInBounds(space)) {
                 continue;
             }
             if (space.map[pos.x][pos.y] != space.EMPTY) {
