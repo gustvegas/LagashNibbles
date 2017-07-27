@@ -8,3 +8,4 @@ export class Pos {
         return this.isValid() && (this.x < topX) && (this.y < topY);
     }
 }
+//# sourceMappingURL=Pos.js.map

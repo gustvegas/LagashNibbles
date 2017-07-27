@@ -31,3 +31,4 @@ export class Vector extends Pos {
         return pos;
     }
 }
+//# sourceMappingURL=Vector.js.map

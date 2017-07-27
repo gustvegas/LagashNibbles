@@ -15,7 +15,7 @@ const YELLOW: Color = "#ffff00";
 const MAGENTA: Color = "#ff00ff";
 const GRAY: Color = "#808080";
 
-class Nibbles {
+export class Nibbles {
     SPACE_X : number  = 50;
     
     SPACE_Y : number = 50;
@@ -31,12 +31,11 @@ class Nibbles {
     space: Space;
 
     hit: boolean;
-    /**
-     * snakes list.
-     */
+
     snakes : Array<Snake>;
 
     constructor() {
+        this.colors = new Array<Color>();
         this.colors.push(RED);
         this.colors.push(GREEN);
         this.colors.push(BLUE);
@@ -54,6 +53,7 @@ class Nibbles {
     }
 
     setupRandom(qty: number, behavior: ISnakeBehavior){
+        this.snakes = new Array<Snake>();
         for(let i = 0; i < qty; i++) {
             let snake = new Snake();
             snake.color = this.colors[i];
@@ -89,12 +89,6 @@ class Nibbles {
             this.space.map[snake.x][snake.y] = snake.id;
         }
         //printSnakes(snakes);
-    }
-
-    start() {
-        for(let i = 0; i < 10; i++) {
-            this.update();
-        }
     }
 
     update() {

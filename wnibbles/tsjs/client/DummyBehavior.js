@@ -20,3 +20,4 @@ export class DummyBehavior {
         return snake.direction;
     }
 }
+//# sourceMappingURL=DummyBehavior.js.map

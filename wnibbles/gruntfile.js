@@ -40,7 +40,7 @@ module.exports = function(grunt) {
         }],
         options: {
           target: "es6",
-          sourceMap: false,
+          sourceMap: true,
           rootDir: "src"
          }
       }

@@ -2,6 +2,7 @@ import { Vector } from './Vector';
 export class Snake extends Vector {
     constructor() {
         super();
+        this.trail = new Array();
     }
     reduceLength(count) {
         this.length -= count;
@@ -55,3 +56,4 @@ export class Snake extends Vector {
         }
     }
 }
+//# sourceMappingURL=Snake.js.map

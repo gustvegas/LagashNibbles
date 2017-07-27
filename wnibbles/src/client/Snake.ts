@@ -14,6 +14,7 @@ export class Snake extends Vector {
 
     constructor() {
         super();
+        this.trail = new Array<Vector>();
     }
 
     reduceLength(count: number): Vector {

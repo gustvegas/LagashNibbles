@@ -9,12 +9,13 @@ const GREEN = "#008000F";
 const YELLOW = "#ffff00";
 const MAGENTA = "#ff00ff";
 const GRAY = "#808080";
-class Nibbles {
+export class Nibbles {
     constructor() {
         this.SPACE_X = 50;
         this.SPACE_Y = 50;
         this.REDUCE_STEP = 5;
         this.ticks = 0;
+        this.colors = new Array();
         this.colors.push(RED);
         this.colors.push(GREEN);
         this.colors.push(BLUE);
@@ -28,6 +29,7 @@ class Nibbles {
         return Math.floor(Math.random() * (max - min + 1) + min);
     }
     setupRandom(qty, behavior) {
+        this.snakes = new Array();
         for (let i = 0; i < qty; i++) {
             let snake = new Snake();
             snake.color = this.colors[i];
@@ -60,11 +62,6 @@ class Nibbles {
             this.space.map[snake.x][snake.y] = snake.id;
         }
     }
-    start() {
-        for (let i = 0; i < 10; i++) {
-            this.update();
-        }
-    }
     update() {
         let debug = false;
         let idx = 0;
@@ -95,3 +92,4 @@ class Nibbles {
         }
     }
 }
+//# sourceMappingURL=Nibbles.js.map
