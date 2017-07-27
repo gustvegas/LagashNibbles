@@ -1,8 +1,9 @@
 import { Vector } from './Vector';
 export class Snake extends Vector {
-    constructor() {
+    constructor(id) {
         super();
         this.trail = new Array();
+        this.id = id;
     }
     reduceLength(count) {
         this.length -= count;

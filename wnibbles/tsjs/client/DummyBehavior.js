@@ -6,7 +6,7 @@ export class DummyBehavior {
             && (space.map[pos.x][pos.y] == 0)) {
             return snake.direction;
         }
-        for (let i = 0; i < 4; i++) {
+        for (let i = 1; i < 4; i++) {
             let dir = Direction[Direction[i]];
             pos = snake.moveNewDirection(dir);
             if (!pos.isValidInBounds(space.topX, space.topY)) {

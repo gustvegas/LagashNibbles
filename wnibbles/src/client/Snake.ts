@@ -12,9 +12,10 @@ export class Snake extends Vector {
     color: Color;
     behavior: ISnakeBehavior;
 
-    constructor() {
+    constructor(id: number) {
         super();
         this.trail = new Array<Vector>();
+        this.id = id;
     }
 
     reduceLength(count: number): Vector {

@@ -44,7 +44,7 @@ export class Nibbles {
         this.colors.push(GRAY);
         this.colors.push(WHITE);
 
-        this.setupRandom(7, new DummyBehavior());
+        this.setupRandom(1, new DummyBehavior());
     }
 
     randomIntFromInterval(min,max)
@@ -54,22 +54,22 @@ export class Nibbles {
 
     setupRandom(qty: number, behavior: ISnakeBehavior){
         this.snakes = new Array<Snake>();
-        for(let i = 0; i < qty; i++) {
-            let snake = new Snake();
+        for(let i: number = 0; i < qty; i++) {
+            let snake = new Snake(i);
             snake.color = this.colors[i];
             snake.behavior = behavior;
             this.snakes.push(snake);
         }
         this.loser = null;
         this.space = new Space(this.SPACE_X, this.SPACE_Y);
-        for(let i = 0; i < qty; i++) {
+        for(let i: number = 0; i < qty; i++) {
             let snake = this.snakes[i];
             snake.x = this.randomIntFromInterval(0, this.SPACE_X);
             snake.y = this.randomIntFromInterval(0, this.SPACE_Y);
             snake.direction = Direction[Direction[this.randomIntFromInterval(1,4)]];
             
             // If snake placed in borders ensure a safe direction
-            for(let i = 0; i < 4; i++) {
+            for(let i: number = 1; i < 4; i++) {
                 let direction = Direction[Direction[i]];
                 if(snake.willHitNextStep(this.space)) {
                     snake.direction = direction;
@@ -84,7 +84,7 @@ export class Nibbles {
         this.loser = null;
         this.space = new Space(this.SPACE_X, this.SPACE_Y);
         
-        for(let i = 0; i < this.snakes.length; i++) {
+        for(let i: number = 0; i < this.snakes.length; i++) {
             let snake = this.snakes[i];
             this.space.map[snake.x][snake.y] = snake.id;
         }
@@ -92,11 +92,11 @@ export class Nibbles {
     }
 
     update() {
-        let debug = false;
-        let idx = 0;
+        let debug: boolean = false;
+        let idx: number = 0;
         if(!this.hit) {
             this.ticks++;
-            for(let i = 0; i < this.snakes.length; i++) {
+            for(let i: number = 0; i < this.snakes.length; i++) {
                 let snake = this.snakes[i];
                 if(debug) {
                     // space.printSpace();
