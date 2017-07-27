@@ -6,6 +6,7 @@ import * as path from "path";
 import errorHandler = require("errorhandler");
 import methodOverride = require("method-override");
 import { IndexRoute } from "./routes/index";
+import { NextMoveRoute } from "./routes/nextMove";
 
 /**
  * The server.
@@ -112,6 +113,8 @@ export class Server {
 
 	  //IndexRoute
 	  IndexRoute.create(router);
+
+		NextMoveRoute.create(router);
 
 	  //use router middleware
 	  this.app.use(router);

@@ -34,10 +34,14 @@ module.exports = function(grunt) {
         }
       }
     },
+    clean: ['*.tmp.txt'],
     watch: {
       ts: {
-        files: ["src/\*\*/\*.ts"],
-        tasks: ["ts"]
+        files: [{
+          src: ["src/\*\*/\*.ts"],
+          dest: "./dist"
+        }],
+        tasks: ["ts", "clean"]
       },
       views: {
         files: ["views/**/*.pug"],
@@ -49,10 +53,13 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks("grunt-contrib-copy");
   grunt.loadNpmTasks("grunt-contrib-watch");
   grunt.loadNpmTasks("grunt-ts");
+  grunt.loadNpmTasks('grunt-contrib-clean');
+  grunt.loadNpmTasks('grunt-move');
 
   grunt.registerTask("default", [
     "copy",
-    "ts"
+    "ts",
+    "clean"
   ]);
 
 };

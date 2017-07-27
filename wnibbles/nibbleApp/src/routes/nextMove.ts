@@ -3,11 +3,11 @@ import { BaseRoute } from "./route";
 
 
 /**
- * / route
+ * /nextMove route
  *
  * @class User
  */
-export class IndexRoute extends BaseRoute {
+export class NextMoveRoute extends BaseRoute {
 
   /**
    * Create the routes.
@@ -19,8 +19,8 @@ export class IndexRoute extends BaseRoute {
   public static create(router: Router) {
 
     //add home page route
-    router.get("/", (req: Request, res: Response, next: NextFunction) => {
-      new IndexRoute().index(req, res, next);
+    router.get("/nextMove", (req: Request, res: Response, next: NextFunction) => {
+      new NextMoveRoute().nextMove(req, res, next);
     });
   }
 
@@ -43,16 +43,14 @@ export class IndexRoute extends BaseRoute {
    * @param res {Response} The express Response object.
    * @next {NextFunction} Execute the next method.
    */
-  public index(req: Request, res: Response, next: NextFunction) {
+  public nextMove(req: Request, res: Response, next: NextFunction) {
     //set custom title
-    this.title = "Home | Nibble App";
-
-    //set options
-    let options: Object = {
-      "message": "Sample Nibble App!"
+    let payload: Object = {
+      a: "a",
+      b: "b"
     };
 
     //render template
-    this.render(req, res, "index", options);
+    this.json(req, res, payload);
   }
 }

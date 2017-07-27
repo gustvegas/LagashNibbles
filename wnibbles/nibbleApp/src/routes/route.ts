@@ -60,4 +60,25 @@ export class BaseRoute {
     //render view
     res.render(view, options);
   }
+
+  /**
+   * Render a JSON response.
+   *
+   * @class BaseRoute
+   * @method render
+   * @param req {Request} The request object.
+   * @param res {Response} The response object.
+   * @param view {String} The view to render.
+   * @param options {Object} Additional options to append to the view's local scope.
+   * @return void
+   */
+  public json(req: Request, res: Response, body: any, options?: Object) {
+    //add constants
+    res.locals.BASE_URL = "/";
+
+    //TODO: options for headers
+    
+    //render json
+    res.json(body);
+  }
 }

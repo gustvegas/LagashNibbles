@@ -8,6 +8,7 @@ const path = require("path");
 const errorHandler = require("errorhandler");
 const methodOverride = require("method-override");
 const index_1 = require("./routes/index");
+const nextMove_1 = require("./routes/nextMove");
 class Server {
     static bootstrap() {
         return new Server();
@@ -41,6 +42,7 @@ class Server {
         let router;
         router = express.Router();
         index_1.IndexRoute.create(router);
+        nextMove_1.NextMoveRoute.create(router);
         this.app.use(router);
     }
 }

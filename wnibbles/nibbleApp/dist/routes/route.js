@@ -15,5 +15,9 @@ class BaseRoute {
         res.locals.title = this.title;
         res.render(view, options);
     }
+    json(req, res, body, options) {
+        res.locals.BASE_URL = "/";
+        res.json(body);
+    }
 }
 exports.BaseRoute = BaseRoute;
