@@ -18,6 +18,12 @@ export class Snake extends Vector {
         this.id = id;
     }
 
+    step() {
+        this.ticks++;
+        this.length++;
+        this.move();
+    }
+
     reduceLength(count: number): Vector {
         this.length -= count;
 
@@ -40,12 +46,6 @@ export class Snake extends Vector {
         newVec.y = first.y;
         newVec.direction = first.direction;
         return newVec;
-    }
-
-    step() {
-        this.ticks++;
-        this.length++;
-        this.move();
     }
 
     willHitNextStep(space:Space):boolean {

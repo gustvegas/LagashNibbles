@@ -5,6 +5,11 @@ export class Snake extends Vector {
         this.trail = new Array();
         this.id = id;
     }
+    step() {
+        this.ticks++;
+        this.length++;
+        this.move();
+    }
     reduceLength(count) {
         this.length -= count;
         let first = this.trail[0];
@@ -25,11 +30,6 @@ export class Snake extends Vector {
         newVec.y = first.y;
         newVec.direction = first.direction;
         return newVec;
-    }
-    step() {
-        this.ticks++;
-        this.length++;
-        this.move();
     }
     willHitNextStep(space) {
         let pos = this.moveNewDirection(this.direction);
