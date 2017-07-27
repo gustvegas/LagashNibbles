@@ -11,8 +11,8 @@ const MAGENTA = "#ff00ff";
 const GRAY = "#808080";
 export class Nibbles {
     constructor() {
-        this.SPACE_X = 50;
-        this.SPACE_Y = 50;
+        this.SPACE_X = 30;
+        this.SPACE_Y = 30;
         this.REDUCE_STEP = 5;
         this.ticks = 0;
         this.colors = new Array();
@@ -23,7 +23,7 @@ export class Nibbles {
         this.colors.push(MAGENTA);
         this.colors.push(GRAY);
         this.colors.push(WHITE);
-        this.setupRandom(1, new DummyBehavior());
+        this.setupRandom(2, new DummyBehavior());
     }
     randomIntFromInterval(min, max) {
         return Math.floor(Math.random() * (max - min + 1) + min);
@@ -43,7 +43,7 @@ export class Nibbles {
             snake.x = this.randomIntFromInterval(0, this.SPACE_X);
             snake.y = this.randomIntFromInterval(0, this.SPACE_Y);
             snake.direction = Direction[Direction[this.randomIntFromInterval(1, 4)]];
-            for (let i = 1; i < 4; i++) {
+            for (let i = 1; i <= 4; i++) {
                 let direction = Direction[Direction[i]];
                 if (snake.willHitNextStep(this.space)) {
                     snake.direction = direction;

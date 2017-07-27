@@ -16,9 +16,9 @@ const MAGENTA: Color = "#ff00ff";
 const GRAY: Color = "#808080";
 
 export class Nibbles {
-    SPACE_X : number  = 50;
+    SPACE_X : number  = 30;
     
-    SPACE_Y : number = 50;
+    SPACE_Y : number = 30;
 
     REDUCE_STEP : number = 5;
 
@@ -44,7 +44,7 @@ export class Nibbles {
         this.colors.push(GRAY);
         this.colors.push(WHITE);
 
-        this.setupRandom(1, new DummyBehavior());
+        this.setupRandom(2, new DummyBehavior());
     }
 
     randomIntFromInterval(min,max)
@@ -69,7 +69,7 @@ export class Nibbles {
             snake.direction = Direction[Direction[this.randomIntFromInterval(1,4)]];
             
             // If snake placed in borders ensure a safe direction
-            for(let i: number = 1; i < 4; i++) {
+            for(let i: number = 1; i <= 4; i++) {
                 let direction = Direction[Direction[i]];
                 if(snake.willHitNextStep(this.space)) {
                     snake.direction = direction;

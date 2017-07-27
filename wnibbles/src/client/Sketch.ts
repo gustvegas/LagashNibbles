@@ -32,13 +32,13 @@ var sketch = function( p ) {
             p.rect(snake.x * blockSize, snake.y * blockSize, blockSize-1, blockSize-1);
 
             let pvec = snake;
-            for(let t: number = 0; t < snake.trail.length; t++) {
+            for(let t: number = snake.trail.length-1; t >= 0; t--) {
                 let vec = snake.trail[t];
 
                 p.rect(vec.x * blockSize, vec.y * blockSize, blockSize-1, blockSize-1);
                 if(pvec != null) {
                     p.strokeWeight(blockSize);
-                    p.line((vec.x * 10) + 5, (vec.y * 10) + 5, (pvec.x * 10) + 5, (pvec.y * 10) + 5);
+                    p.line((vec.x * blockSize) + 5, (vec.y * blockSize) + 5, (pvec.x * 10) + 5, (pvec.y * 10) + 5);
                 }
                 pvec = vec;
             }

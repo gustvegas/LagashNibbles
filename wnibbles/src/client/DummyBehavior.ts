@@ -13,7 +13,7 @@ export class DummyBehavior implements ISnakeBehavior {
         }
 
         //Busco nueva dirección clockwise para no chocarme
-        for(let i:number = 1; i < 4; i++) {
+        for(let i:number = 1; i <= 4; i++) {
             let dir = Direction[Direction[i]];
             pos = snake.moveNewDirection(dir);
             if(!pos.isValidInBounds(space.topX, space.topY)) {
