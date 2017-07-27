@@ -1,36 +1,22 @@
-import {Vector} from './Vector';
-import {Space} from './Space';
-import {ISnakeBehavior} from './ISnakeBehavior';
-import {Color} from './Nibbles';
-
+import { Vector } from './Vector';
 export class Snake extends Vector {
-    id: number;
-    ticks: number;
-    trail: Array<Vector>;
-    length: number;
-    color: Color;
-    behavior: ISnakeBehavior;
-
     constructor() {
         super();
     }
-
-    reduceLength(count: number): Vector {
+    reduceLength(count) {
         this.length -= count;
-
         let first = this.trail[0];
         let second = this.trail.length > 1 ? this.trail[1] : null;
         let newFirst = first.moveNewDirection(first.direction);
         first.x = newFirst.x;
         first.y = newFirst.y;
-        if(second != null && 
+        if (second != null &&
             first.x == second.x && first.y == second.y) {
-            this.trail.splice(0,1);
+            this.trail.splice(0, 1);
         }
         return first;
     }
-
-    getTailPosition(): Vector {
+    getTailPosition() {
         let first = this.trail[0];
         let newVec = new Vector();
         newVec.x = first.x;
@@ -38,32 +24,28 @@ export class Snake extends Vector {
         newVec.direction = first.direction;
         return newVec;
     }
-
     step() {
         this.ticks++;
         this.length++;
         this.move();
     }
-
-    willHitNextStep(space:Space):boolean {
+    willHitNextStep(space) {
         let pos = this.moveNewDirection(this.direction);
-        if(pos.isValidInBounds(space.topX, space.topY)
+        if (pos.isValidInBounds(space.topX, space.topY)
             && (space.map[pos.x][pos.y] == 0)) {
             return false;
         }
         return true;
     }
-
-    willHitNextStepInfo(space: Space) : number {
+    willHitNextStepInfo(space) {
         let pos = this.moveNewDirection(this.direction);
-        if(!pos.isValidInBounds(space.topX, space.topY)) {
+        if (!pos.isValidInBounds(space.topX, space.topY)) {
             return -1;
         }
         return space.map[pos.x][pos.y];
     }
-
-    changeDirection(direction: Direction) {
-        if(this.direction != direction || this.trail.length == 0) {
+    changeDirection(direction) {
+        if (this.direction != direction || this.trail.length == 0) {
             let vec = new Vector();
             vec.x = this.x;
             vec.y = this.y;
@@ -72,5 +54,4 @@ export class Snake extends Vector {
             this.direction = direction;
         }
     }
-
 }

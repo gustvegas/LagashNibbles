@@ -1,4 +1,5 @@
 import {Pos} from './Pos';
+import {Direction} from './Direction';
 
 export class Vector extends Pos {
     direction: Direction;

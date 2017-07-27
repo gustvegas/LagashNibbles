@@ -23,17 +23,24 @@ module.exports = function(grunt) {
     ts: {
       app: {
         files: [{
-          src: ["client/\*\*/\*.ts", "!src/.baseDir.ts"],
-          out: "./dist/app-build.js"
-        }],
-        files: [{
-          src: ["src/*.ts", "!src/.baseDir.ts"],
+          src: ["src/server/\*\*/\*.ts"],
           dest: "./dist/"
         }],
         options: {
           module: "commonjs",
           target: "es6",
-          sourceMap: true,
+          sourceMap: false,
+          rootDir: "src"
+         }
+      },
+      client: {
+        files: [{
+          src: ["src/client/\*\*/\*.ts"],
+          dest: "./tsjs/"
+        }],
+        options: {
+          target: "es6",
+          sourceMap: false,
           rootDir: "src"
          }
       }
@@ -41,27 +48,47 @@ module.exports = function(grunt) {
     watch: {
       ts: {
         files: [{
-          src: ["src/\*\*/\*.ts", "!src/.baseDir.ts"],
+          src: ["src/\*\*/\*.ts"],
           dest: "./dist"
         }],
-        tasks: ["ts", "clean"]
+        tasks: ["ts", "browserify", "clean"]
       },
       views: {
         files: ["views/**/*.pug"],
         tasks: ["copy"]
       }
     },
-    clean: ['*.tmp.txt']
+    clean: ['*.tmp.txt'],
+    browserify: {
+      dist: {
+        files: {
+          'dist/public/js/client.js': ['tsjs/client/**/*.js']
+        },
+        options: {
+          transform: [["babelify", { "presets": ["es2015"] }]]
+        }
+      }
+    },
+    move: {
+      test: {
+        src: 'dist/server/routes/*',
+        dest: 'dist/routes/'
+      }
+    }
   });
 
   grunt.loadNpmTasks("grunt-contrib-copy");
   grunt.loadNpmTasks("grunt-contrib-watch");
   grunt.loadNpmTasks("grunt-ts");
   grunt.loadNpmTasks('grunt-contrib-clean');
+  grunt.loadNpmTasks('grunt-browserify');
+  grunt.loadNpmTasks('grunt-move');
 
   grunt.registerTask("default", [
     "copy",
     "ts",
+    "browserify",
+    "move",
     "clean"
   ]);
 

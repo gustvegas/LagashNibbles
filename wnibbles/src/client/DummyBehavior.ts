@@ -1,6 +1,7 @@
 import {ISnakeBehavior} from './ISnakeBehavior';
 import {Space} from './Space';
 import {Snake} from './Snake';
+import {Direction} from './Direction';
 
 export class DummyBehavior implements ISnakeBehavior {
     changeDirection(snake: Snake, space: Space, snakes: Array<Snake>) : Direction {

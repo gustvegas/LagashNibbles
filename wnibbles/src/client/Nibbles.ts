@@ -4,6 +4,7 @@ import {Snake} from './Snake';
 import {Space} from './Space';
 import {ISnakeBehavior} from './ISnakeBehavior';
 import {DummyBehavior} from './DummyBehavior';
+import {Direction} from './Direction';
 
 export type Color = "#FFFFFF" | "#FF0000" | "#0000FF" | "#008000F" | "#ffff00" | "#ff00ff" | "#808080";
 const WHITE: Color = "#FFFFFF";
