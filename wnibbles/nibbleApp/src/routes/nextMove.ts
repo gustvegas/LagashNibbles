@@ -127,10 +127,10 @@ export class NextMoveRoute extends BaseRoute {
    * @next {NextFunction} Execute the next method.
    */
   public postNextMove(req: Request, res: Response, next: NextFunction) {
-    //set custom title
+    let direction: Array<String> = ["Up", "Right", "Down", "Left"];
+
     let payload: Object = {
-      a: "a",
-      b: "b"
+      direction: "a"
     };
 
   
