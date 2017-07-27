@@ -31,7 +31,7 @@ export class Nibbles {
     setupRandom(qty, behavior) {
         this.snakes = new Array();
         for (let i = 0; i < qty; i++) {
-            let snake = new Snake(i);
+            let snake = new Snake(i + 1);
             snake.color = this.colors[i];
             snake.behavior = behavior;
             this.snakes.push(snake);
@@ -72,7 +72,9 @@ export class Nibbles {
                 if (debug) {
                 }
                 let newDir = snake.behavior.changeDirection(snake, this.space, this.snakes);
-                snake.changeDirection(newDir);
+                if (!snake.isOpositeDirection(newDir)) {
+                    snake.changeDirection(newDir);
+                }
                 if (snake.willHitNextStep(this.space)) {
                     this.loser = snake;
                     idx = snake.willHitNextStepInfo(this.space);
@@ -86,7 +88,7 @@ export class Nibbles {
                 if (this.ticks % this.REDUCE_STEP == 0) {
                     let initial = snake.getTailPosition();
                     snake.reduceLength(1);
-                    this.space.map[initial.x][initial.y] = 0;
+                    this.space.map[initial.x][initial.y] = this.space.EMPTY;
                 }
             }
         }

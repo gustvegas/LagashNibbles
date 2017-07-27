@@ -3,16 +3,19 @@ export class DummyBehavior {
     changeDirection(snake, space, snakes) {
         let pos = snake.moveNew();
         if (pos.isValidInBounds(space.topX, space.topY)
-            && (space.map[pos.x][pos.y] == 0)) {
+            && (space.map[pos.x][pos.y] == space.EMPTY)) {
             return snake.direction;
         }
         for (let i = 1; i <= 4; i++) {
             let dir = Direction[Direction[i]];
+            if (snake.isOpositeDirection(dir)) {
+                continue;
+            }
             pos = snake.moveNewDirection(dir);
             if (!pos.isValidInBounds(space.topX, space.topY)) {
                 continue;
             }
-            if (space.map[pos.x][pos.y] > 0) {
+            if (space.map[pos.x][pos.y] != space.EMPTY) {
                 continue;
             }
             return dir;

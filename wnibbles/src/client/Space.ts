@@ -4,6 +4,7 @@ export class Space {
     topY: number;
     
     map: number[][];
+    EMPTY: number = 0;
 
     constructor(x: number, y:number) {
         this.topX = x;
@@ -12,7 +13,7 @@ export class Space {
         for(var i:number = 0; i < x; i++) {
             this.map[i] = [];
             for(var j: number = 0; j< y; j++) {
-                this.map[i][j] = 0;
+                this.map[i][j] = this.EMPTY;
             }
         }
     }

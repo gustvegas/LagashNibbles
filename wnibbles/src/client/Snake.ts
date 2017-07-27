@@ -51,7 +51,7 @@ export class Snake extends Vector {
     willHitNextStep(space:Space):boolean {
         let pos = this.moveNewDirection(this.direction);
         if(pos.isValidInBounds(space.topX, space.topY)
-            && (space.map[pos.x][pos.y] == 0)) {
+            && (space.map[pos.x][pos.y] == space.EMPTY)) {
             return false;
         }
         return true;
