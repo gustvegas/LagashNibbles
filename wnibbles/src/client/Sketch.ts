@@ -33,6 +33,7 @@ var sketch = function(p) {
             for(let t: number = snake.trail.length-1; t >= 0; t--) {
                 let vec = snake.trail[t];
 
+                p.strokeWeight(1)
                 p.rect(vec.x * BLOCK_SIZE, vec.y * BLOCK_SIZE, BLOCK_SIZE-1, BLOCK_SIZE-1);
                 if(pvec != null) {
                     p.strokeWeight(BLOCK_SIZE);
