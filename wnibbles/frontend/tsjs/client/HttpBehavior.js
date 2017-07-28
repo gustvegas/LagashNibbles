@@ -29,14 +29,12 @@ export class HttpBehavior {
                 async: false,
                 timeout: 0,
                 success: function (result) {
-                    console.log(result.direction);
                     let newDir = Direction[result.direction];
                     if (result.isOk == false)
                         console.log(result);
                     return resolve(newDir);
                 },
             };
-            console.log(`r: snake: ${snake.id}: newDir: ${snake.direction}`);
             jQuery.ajax('http://localhost:8088/nextMove', settings);
         });
     }

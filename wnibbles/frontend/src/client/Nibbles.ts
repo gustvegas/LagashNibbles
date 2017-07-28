@@ -114,8 +114,6 @@ export class Nibbles {
                         let snake = this.snakes[i];
                         let newDir: Direction = res[i];
                         
-                        console.log(`a: snake: ${snake.id}: newDir: ${newDir}`);
-                        
                         // If opposite direction, keep same
                         if(!snake.isOpositeDirection(newDir)) {
                             snake.changeDirection(newDir);
@@ -128,7 +126,6 @@ export class Nibbles {
                                 // space.printSpace();
                                 // this.printSnakes(snakes);
                             }
-                            // System.out.println(String.format("Loser: %d hit " + (idx == -1 ? "wall" : idx), this.loser.getId(), idx));
                             this.hit = true;
                             break;
                         }

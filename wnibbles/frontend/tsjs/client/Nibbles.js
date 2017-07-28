@@ -80,7 +80,6 @@ export class Nibbles {
                 for (let i = 0; i < this.snakes.length; i++) {
                     let snake = this.snakes[i];
                     let newDir = res[i];
-                    console.log(`a: snake: ${snake.id}: newDir: ${newDir}`);
                     if (!snake.isOpositeDirection(newDir)) {
                         snake.changeDirection(newDir);
                     }
