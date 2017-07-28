@@ -10,6 +10,7 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
+    "@types/request": "^2.0.0",
     "body-parser": "^1.17.2",
     "cookie-parser": "^1.4.3",
     "errorhandler": "^1.5.0",

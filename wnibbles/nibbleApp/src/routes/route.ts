@@ -76,8 +76,8 @@ export class BaseRoute {
     //add constants
     res.locals.BASE_URL = "/";
 
-    //TODO: options for headers
-    
+    res.header("Access-Control-Allow-Origin", "*");
+
     //render json
     res.json(body);
   }

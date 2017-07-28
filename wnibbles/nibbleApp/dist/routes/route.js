@@ -17,6 +17,7 @@ class BaseRoute {
     }
     json(req, res, body, options) {
         res.locals.BASE_URL = "/";
+        res.header("Access-Control-Allow-Origin", "*");
         res.json(body);
     }
 }

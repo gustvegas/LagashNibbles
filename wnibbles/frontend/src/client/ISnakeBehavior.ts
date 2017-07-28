@@ -3,5 +3,5 @@ import {Snake} from './Snake';
 import {Direction} from './Direction';
 
 export interface ISnakeBehavior {
-    changeDirection(snake: Snake, space: Space, snakes: Array<Snake>) : Direction;
+    changeDirection(snake: Snake, space: Space, snakes: Array<Snake>) : Promise<Direction>;
 }
