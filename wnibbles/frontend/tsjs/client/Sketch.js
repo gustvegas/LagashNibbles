@@ -1,8 +1,8 @@
 import { Nibbles } from './Nibbles';
 var sketch = function (p) {
-    var BLOCK_SIZE = 10;
-    var frameRate = 10;
-    var nibbles;
+    let BLOCK_SIZE = 10;
+    let frameRate = 10;
+    let nibbles;
     p.setup = function () {
         nibbles = new Nibbles(5);
         nibbles.init();
@@ -17,6 +17,9 @@ var sketch = function (p) {
             p.fill(snake.color);
             p.stroke(snake.color);
             p.strokeWeight(1);
+            if (nibbles.hit && nibbles.loser.id == snake.id) {
+                p.stroke('#FFFFFF');
+            }
             p.rect(snake.x * BLOCK_SIZE, snake.y * BLOCK_SIZE, BLOCK_SIZE - 1, BLOCK_SIZE - 1);
             let pvec = snake;
             for (let t = snake.trail.length - 1; t >= 0; t--) {

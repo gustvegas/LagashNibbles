@@ -1,12 +1,13 @@
 /// <reference path="../../typings/p5js/p5.d.ts"/>
 
 import {Nibbles} from './Nibbles';
+import {Vector} from './Vector';
 
 var sketch = function(p) {
 
-    var BLOCK_SIZE = 10;
-    var frameRate = 10;
-    var nibbles;
+    let BLOCK_SIZE = 10;
+    let frameRate = 10;
+    let nibbles: Nibbles;
 
     p.setup = function() {
         nibbles = new Nibbles(5);
@@ -26,14 +27,17 @@ var sketch = function(p) {
 
             p.fill(snake.color);
             p.stroke(snake.color);
-            p.strokeWeight(1)
+            p.strokeWeight(1);
+            if(nibbles.hit && nibbles.loser.id == snake.id) {
+                p.stroke('#FFFFFF');
+            }
             p.rect(snake.x * BLOCK_SIZE, snake.y * BLOCK_SIZE, BLOCK_SIZE-1, BLOCK_SIZE-1);
 
-            let pvec = snake;
+            let pvec: Vector = snake;
             for(let t: number = snake.trail.length-1; t >= 0; t--) {
                 let vec = snake.trail[t];
 
-                p.strokeWeight(1)
+                p.strokeWeight(1);
                 p.rect(vec.x * BLOCK_SIZE, vec.y * BLOCK_SIZE, BLOCK_SIZE-1, BLOCK_SIZE-1);
                 if(pvec != null) {
                     p.strokeWeight(BLOCK_SIZE);

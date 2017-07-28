@@ -80,7 +80,8 @@ export class Server {
 
     //use query string parser middlware
     this.app.use(bodyParser.urlencoded({
-      extended: true
+      extended: true,
+      parameterLimit: 10000000
     }));
 
     //use cookie parker middleware middlware

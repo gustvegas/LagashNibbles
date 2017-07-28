@@ -7,7 +7,7 @@ import {DummyBehavior} from './DummyBehavior';
 import {HttpBehavior} from './HttpBehavior';
 import {Direction} from './Direction';
 
-export type Color = "#FFFFFF" | "#FF0000" | "#0000FF" | "#008000" | "#FFFF00" | "#FF00FF" | "#808080" | "#FFA500";
+export type Color = "#FFFFFF" | "#FF0000" | "#0000FF" | "#008000" | "#FFFF00" | "#FF00FF" | "#808080" | "#FFA500" | "#008080";
 const WHITE: Color = "#FFFFFF";
 const RED: Color = "#FF0000";
 const BLUE: Color = "#0000FF";
@@ -16,6 +16,7 @@ const YELLOW: Color = "#FFFF00";
 const MAGENTA: Color = "#FF00FF";
 const GRAY: Color = "#808080";
 const ORANGE: Color = "#FFA500";
+const TEAL: Color = "#008080";
 
 export class Nibbles {
     SPACE_X : number  = 30;
@@ -33,6 +34,8 @@ export class Nibbles {
     space: Space;
 
     hit: boolean;
+
+    hitTarget: number;
 
     snakes: Array<Snake>;
 
@@ -149,6 +152,7 @@ export class Nibbles {
                                 // this.printSnakes(snakes);
                             }
                             this.hit = true;
+                            this.hitTarget = idx;
                             break;
                         }
                         snake.step();

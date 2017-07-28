@@ -1,5 +1,3 @@
-// import * as http from 'http';
-// import * as request from 'request';
 import * as jQuery from 'jquery';
 import {ISnakeBehavior} from './ISnakeBehavior';
 import {Space} from './Space';
@@ -25,10 +23,9 @@ export class HttpBehavior implements ISnakeBehavior {
                     "topY": space.topY,
                     "map": space.map
                 },
-                "snakes": snakes
+                //"snakes": snakes
             }
 
-            let newDirection: any;
             let settings = {
                 data: payload,
                 method: "post",
@@ -45,32 +42,8 @@ export class HttpBehavior implements ISnakeBehavior {
                 'http://localhost:8088/nextMove',
                 settings
             );
+
         });
-    
-
-        // var options = {
-        //     hostname: 'localhost',
-        //     port: 8088,
-        //     path: '/nextMove',
-        //     method: 'POST',
-        //     headers: {
-        //         'Content-Type': 'application/json',
-        //     }
-        // };
-
-        // var req = http.request(options, function(res) {
-        //     console.log('Status: ' + res.statusCode);
-        //     console.log('Headers: ' + JSON.stringify(res.headers));
-        //     res.setEncoding('utf8');
-        //     res.on('data', function (body) {
-        //         console.log('Body: ' + body);
-        //     });
-        // });
-        // req.on('error', function(e) {
-        //     console.log('problem with request: ' + e.message);
-        // });
-        // req.write('{"string": "Hello, World"}');
-        // req.end();
 
     }
 }

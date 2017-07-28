@@ -10,6 +10,7 @@ const YELLOW = "#FFFF00";
 const MAGENTA = "#FF00FF";
 const GRAY = "#808080";
 const ORANGE = "#FFA500";
+const TEAL = "#008080";
 export class Nibbles {
     constructor(snakeCount) {
         this.SPACE_X = 30;
@@ -103,6 +104,7 @@ export class Nibbles {
                         if (debug) {
                         }
                         this.hit = true;
+                        this.hitTarget = idx;
                         break;
                     }
                     snake.step();
