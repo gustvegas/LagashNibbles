@@ -1,6 +1,6 @@
 import { Snake } from './Snake';
 import { Space } from './Space';
-import { HttpBehavior } from './HttpBehavior';
+import { DummyBehavior } from './DummyBehavior';
 import { Direction } from './Direction';
 const WHITE = "#FFFFFF";
 const RED = "#FF0000";
@@ -11,7 +11,7 @@ const MAGENTA = "#FF00FF";
 const GRAY = "#808080";
 const ORANGE = "#FFA500";
 export class Nibbles {
-    constructor() {
+    constructor(snakeCount) {
         this.SPACE_X = 30;
         this.SPACE_Y = 30;
         this.REDUCE_STEP = 5;
@@ -24,7 +24,19 @@ export class Nibbles {
         this.colors.push(MAGENTA);
         this.colors.push(GRAY);
         this.colors.push(WHITE);
-        this.setupRandom(2, new HttpBehavior());
+        this.snakeCount = snakeCount;
+        this.setupRandom(snakeCount, new DummyBehavior());
+    }
+    shuffle(array) {
+        var currentIndex = array.length, temporaryValue, randomIndex;
+        while (0 !== currentIndex) {
+            randomIndex = Math.floor(Math.random() * currentIndex);
+            currentIndex -= 1;
+            temporaryValue = array[currentIndex];
+            array[currentIndex] = array[randomIndex];
+            array[randomIndex] = temporaryValue;
+        }
+        return array;
     }
     randomIntFromInterval(min, max) {
         return Math.floor(Math.random() * (max - min + 1) + min);
@@ -69,16 +81,18 @@ export class Nibbles {
         if (!this.hit) {
             this.ticks++;
             let directions = new Array();
-            for (let i = 0; i < this.snakes.length; i++) {
-                let snake = this.snakes[i];
+            var newList = this.shuffle(this.snakes);
+            for (let i = 0; i < newList.length; i++) {
+                let snake = newList[i];
+                snake.ticks = this.ticks;
                 if (debug) {
                 }
                 directions.push(snake.behavior.changeDirection(snake, this.space, this.snakes));
             }
             Promise.all(directions)
                 .then((res) => {
-                for (let i = 0; i < this.snakes.length; i++) {
-                    let snake = this.snakes[i];
+                for (let i = 0; i < newList.length; i++) {
+                    let snake = newList[i];
                     let newDir = res[i];
                     if (!snake.isOpositeDirection(newDir)) {
                         snake.changeDirection(newDir);

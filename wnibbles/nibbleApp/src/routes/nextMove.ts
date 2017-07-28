@@ -132,12 +132,12 @@ export class NextMoveRoute extends BaseRoute {
    */
   public postNextMove(req: Request, res: Response, next: NextFunction) {
     
-    let snake = new Snake(req.body.snake.id);
-    snake.x = <number>req.body.snake.x * 1;
-    snake.y = <number>req.body.snake.y * 1;
+    let snake = new Snake(+req.body.snake.id);
+    snake.x = +req.body.snake.x;
+    snake.y = +req.body.snake.y;
     let direction: Direction = (<any>Direction)[req.body.snake.direction];
     snake.direction = direction;
-    snake.ticks = <number>req.body.snake.ticks;
+    snake.ticks = +req.body.snake.ticks;
     snake.trail = req.body.snake.trail;
 
     let space = new Space(req.body.space.topX, req.body.space.topY);

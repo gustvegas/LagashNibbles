@@ -13,6 +13,8 @@ export class DummyBehavior implements ISnakeBehavior {
                 return resolve(snake.direction);
             }
 
+            //TODO: validar que otro no pueda mover donde yo me muevo
+
             //Busco nueva dirección clockwise para no chocarme
             for(let i:number = 1; i <= 4; i++) {
                 let dir = Direction[Direction[i]];
@@ -26,7 +28,7 @@ export class DummyBehavior implements ISnakeBehavior {
                 if(space.map[pos.x][pos.y] != space.EMPTY) {
                     continue;
                 }
-                return dir;
+                return resolve(dir);
             }
             return resolve(snake.direction);
         });

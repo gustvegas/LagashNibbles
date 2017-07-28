@@ -25,8 +25,7 @@ export class HttpBehavior implements ISnakeBehavior {
                     "topY": space.topY,
                     "map": space.map
                 },
-                "snakes": [
-                ]
+                "snakes": snakes
             }
 
             let newDirection: any;

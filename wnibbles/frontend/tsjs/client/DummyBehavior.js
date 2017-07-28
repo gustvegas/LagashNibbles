@@ -19,7 +19,7 @@ export class DummyBehavior {
                 if (space.map[pos.x][pos.y] != space.EMPTY) {
                     continue;
                 }
-                return dir;
+                return resolve(dir);
             }
             return resolve(snake.direction);
         });

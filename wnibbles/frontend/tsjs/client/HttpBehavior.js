@@ -19,7 +19,7 @@ export class HttpBehavior {
                     "topY": space.topY,
                     "map": space.map
                 },
-                "snakes": []
+                "snakes": snakes
             };
             let newDirection;
             let settings = {
