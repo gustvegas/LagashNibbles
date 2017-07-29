@@ -4,4 +4,4 @@ js/ts.js
 .tscache/
 dist/
 *.tmp.txt
-tsjs/
+tsjs/client/
