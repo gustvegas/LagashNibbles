@@ -41,6 +41,8 @@ export class Nibbles {
 
     snakeCount: number;
 
+    inUpdate: boolean;
+
     constructor(snakeCount: number) {
         this.colors = new Array<Color>();
         this.colors.push(RED);
@@ -117,6 +119,10 @@ export class Nibbles {
     }
 
     update() {
+        if(this.inUpdate) {
+            return;
+        }
+        this.inUpdate = true;
         let debug: boolean = false;
         let idx: number = 0;
         if(!this.hit) {
@@ -163,8 +169,8 @@ export class Nibbles {
                             this.space.map[initial.x][initial.y] = this.space.EMPTY;
                         }
                     }
+                    this.inUpdate = false;
                 });
-
         }
     }
 }

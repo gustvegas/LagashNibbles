@@ -10,7 +10,7 @@ var sketch = function(p) {
     let nibbles: Nibbles;
 
     p.setup = function() {
-        nibbles = new Nibbles(5);
+        nibbles = new Nibbles(2);
         nibbles.init();
 
         p.frameRate(frameRate);

@@ -4,7 +4,7 @@ var sketch = function (p) {
     let frameRate = 10;
     let nibbles;
     p.setup = function () {
-        nibbles = new Nibbles(5);
+        nibbles = new Nibbles(2);
         nibbles.init();
         p.frameRate(frameRate);
         p.createCanvas(nibbles.SPACE_X * BLOCK_SIZE, nibbles.SPACE_Y * BLOCK_SIZE);

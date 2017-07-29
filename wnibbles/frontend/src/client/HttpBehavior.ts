@@ -16,6 +16,18 @@ export class HttpBehavior implements ISnakeBehavior {
                 "ticks": snake.ticks,
                 "trail": snake.trail,
             };
+            var payloadSnakes: Array<object> = [];
+            snakes.forEach( function( s ) {
+                payloadSnakes.push({
+                    "id": s.id,
+                    "x": s.x,
+                    "y": s.y,
+                    "direction": <string>Direction[s.direction],
+                    "length": s.length,
+                    "ticks": s.ticks,
+                    "trail": s.trail,
+                });
+            } );
             let payload: object = {
                 "snake": payloadSnake,
                 "space": {
@@ -23,7 +35,7 @@ export class HttpBehavior implements ISnakeBehavior {
                     "topY": space.topY,
                     "map": space.map
                 },
-                "snakes": snakes
+                "snakes": payloadSnakes
             }
             jQuery.ajax({
                 url: 'http://localhost:8000/nextMove',

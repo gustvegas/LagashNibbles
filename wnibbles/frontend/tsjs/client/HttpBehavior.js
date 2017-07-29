@@ -12,6 +12,18 @@ export class HttpBehavior {
                 "ticks": snake.ticks,
                 "trail": snake.trail,
             };
+            var payloadSnakes = [];
+            snakes.forEach(function (s) {
+                payloadSnakes.push({
+                    "id": s.id,
+                    "x": s.x,
+                    "y": s.y,
+                    "direction": Direction[s.direction],
+                    "length": s.length,
+                    "ticks": s.ticks,
+                    "trail": s.trail,
+                });
+            });
             let payload = {
                 "snake": payloadSnake,
                 "space": {
@@ -19,7 +31,7 @@ export class HttpBehavior {
                     "topY": space.topY,
                     "map": space.map
                 },
-                "snakes": snakes
+                "snakes": payloadSnakes
             };
             jQuery.ajax({
                 url: 'http://localhost:8000/nextMove',
