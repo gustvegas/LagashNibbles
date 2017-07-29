@@ -14,5 +14,21 @@ html
           span Loser name:
           span#loser-name
           br
+          span Loser 2 name:
+          span#loser-2-name
+          br
           span Hit:
           span#loser-hit
+          br
+          span Framerate:
+          select(name='framerate' id='framerate')
+            option(value='10') 10 fps
+            option(value='20') 20 fps
+            option(value='30') 30 fps
+            option(value='40') 40 fps
+          br
+          span Size:
+          input(type='text', name='topX', id='topX', value='30')          
+          input(type='text', name='topY', id='topY', value='30')          
+          br
+          input(type='button', id='start', value='Start')

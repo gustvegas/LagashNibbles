@@ -47,19 +47,33 @@ module.exports = function(grunt) {
     },
     watch: {
       ts: {
-        files: [{
-          src: ["src/\*\*/\*.ts"],
-          dest: "./dist"
-        }],
+        files: ["./src","./dist"],
         tasks: ["ts", "browserify", "clean"]
       },
+      ts2: {
+        files: ["./dist"],
+        tasks: ["browserify", "clean"]
+      },
       views: {
-        files: ["views/**/*.pug"],
+        files: ["views"],
         tasks: ["copy"]
       },
       public: {
-        files: ["public/**/*.*"],
+        files: ["public"],
         tasks: ["copy"]
+      }
+    },
+    concurrent: {
+        dev: {
+            tasks: ['nodemon', 'watch'],
+            options: {
+                logConcurrentOutput: true
+            }
+        }
+    },
+    nodemon: {
+      dev: {
+        script: './bin/www'
       }
     },
     clean: ['*.tmp.txt'],
@@ -81,12 +95,18 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-browserify');
   grunt.loadNpmTasks('grunt-move');
+  grunt.loadNpmTasks('grunt-concurrent');
+  grunt.loadNpmTasks('grunt-nodemon');
 
   grunt.registerTask("default", [
     "copy",
     "ts",
     "browserify",
-    "clean"
+    //"clean"
+  ]);
+
+  grunt.registerTask("run", [
+    "concurrent",
   ]);
 
 };

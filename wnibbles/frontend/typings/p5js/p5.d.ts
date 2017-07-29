@@ -494,7 +494,7 @@ declare class p5 {
     /**
      * Resizes the canvas to given width and height.
      */
-    resizeCanvas():void
+    resizeCanvas(w:number, h:number):void
 
     /**
      * Removes the default canvas for a p5 sketch that doesn't

@@ -28,6 +28,7 @@ export class Nibbles {
     colors : Array<Color>;
 
     loser: Snake;
+    loser2: Snake;
 
     space: Space;
 
@@ -41,7 +42,7 @@ export class Nibbles {
 
     inUpdate: boolean;
 
-    constructor(snakeCount: number, behavior: ISnakeBehavior) {
+    constructor(snakeCount: number, behavior: ISnakeBehavior, spacex: number, spacey: number) {
         this.colors = new Array<Color>();
         this.colors.push(RED);
         this.colors.push(GREEN);
@@ -51,6 +52,8 @@ export class Nibbles {
         this.colors.push(GRAY);
         this.colors.push(WHITE);
 
+        this.SPACE_X = spacex;
+        this.SPACE_Y = spacey;
         this.snakeCount = snakeCount;
         this.setupRandom(snakeCount, behavior);
     }
@@ -89,8 +92,8 @@ export class Nibbles {
         this.space = new Space(this.SPACE_X, this.SPACE_Y);
         for(let i: number = 0; i < qty; i++) {
             let snake = this.snakes[i];
-            snake.x = this.randomIntFromInterval(0, this.SPACE_X);
-            snake.y = this.randomIntFromInterval(0, this.SPACE_Y);
+            snake.x = this.randomIntFromInterval(0, this.SPACE_X-1);
+            snake.y = this.randomIntFromInterval(0, this.SPACE_Y-1);
             snake.direction = Direction[Direction[this.randomIntFromInterval(1,4)]];
             
             // If snake placed in borders ensure a safe direction
@@ -107,6 +110,7 @@ export class Nibbles {
 
     init() {
         this.loser = null;
+        this.loser2 = null;
         this.space = new Space(this.SPACE_X, this.SPACE_Y);
         
         for(let i: number = 0; i < this.snakes.length; i++) {
@@ -158,6 +162,14 @@ export class Nibbles {
                             }
                             this.hit = true;
                             this.hitTarget = idx;
+                            if(idx != -1 && idx != this.loser.id) {
+                                let newPos = this.loser.moveNewDirection(this.loser.direction);
+                                let otherHit = this.snakes.find( (s) => { return s.id == idx; });
+                                if(otherHit.x == newPos.x &&
+                                   otherHit.y == newPos.y) {
+                                    this.loser2 = otherHit;
+                                }
+                            }
                             break;
                         }
                         snake.step();
