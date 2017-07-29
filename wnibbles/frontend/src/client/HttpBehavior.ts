@@ -26,7 +26,7 @@ export class HttpBehavior implements ISnakeBehavior {
                 "snakes": snakes
             }
             jQuery.ajax({
-                url: 'http://localhost:8088/nextMove',
+                url: 'http://localhost:8000/nextMove',
                 data: JSON.stringify(payload),
                 dataType: 'json',
                 contentType: 'application/json',
