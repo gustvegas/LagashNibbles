@@ -76,11 +76,11 @@ export class Nibbles {
         }
     }
     update() {
+        let debug = false;
         if (this.inUpdate) {
             return;
         }
         this.inUpdate = true;
-        let debug = false;
         let idx = 0;
         if (!this.hit) {
             this.ticks++;

@@ -15,7 +15,7 @@ module.exports = function(grunt) {
             expand: true,
             cwd: "./views",
             src: ["**"],
-            dest: "./dist/views"
+            dest: "./dist/server/views"
           }
         ]
       }
@@ -56,6 +56,10 @@ module.exports = function(grunt) {
       views: {
         files: ["views/**/*.pug"],
         tasks: ["copy"]
+      },
+      public: {
+        files: ["public/**/*.*"],
+        tasks: ["copy"]
       }
     },
     clean: ['*.tmp.txt'],
@@ -67,12 +71,6 @@ module.exports = function(grunt) {
         options: {
           transform: [["babelify", { "presets": ["es2015"] }]]
         }
-      }
-    },
-    move: {
-      test: {
-        src: 'dist/server/routes/*',
-        dest: 'dist/routes/'
       }
     }
   });
@@ -88,7 +86,6 @@ module.exports = function(grunt) {
     "copy",
     "ts",
     "browserify",
-    "move",
     "clean"
   ]);
 

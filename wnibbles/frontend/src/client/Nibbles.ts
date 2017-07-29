@@ -117,11 +117,12 @@ export class Nibbles {
     }
 
     update() {
+        let debug: boolean = false;
+        // Avaoid execution if already waiting answers
         if(this.inUpdate) {
             return;
         }
         this.inUpdate = true;
-        let debug: boolean = false;
         let idx: number = 0;
         if(!this.hit) {
             this.ticks++;

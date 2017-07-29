@@ -1,14 +1,15 @@
 import { Nibbles } from './Nibbles';
-import { HttpBehavior } from './HttpBehavior';
+import { DummyBehavior } from './DummyBehavior';
 var sketch = function (p) {
     let BLOCK_SIZE = 10;
     let frameRate = 10;
     let nibbles;
     p.setup = function () {
-        nibbles = new Nibbles(4, new HttpBehavior());
+        nibbles = new Nibbles(4, new DummyBehavior());
         nibbles.init();
         p.frameRate(frameRate);
-        p.createCanvas(nibbles.SPACE_X * BLOCK_SIZE, nibbles.SPACE_Y * BLOCK_SIZE);
+        let canvas = p.createCanvas(nibbles.SPACE_X * BLOCK_SIZE, nibbles.SPACE_Y * BLOCK_SIZE);
+        canvas.parent('board');
     };
     p.draw = function () {
         nibbles.update();
@@ -33,6 +34,10 @@ var sketch = function (p) {
                 }
                 pvec = vec;
             }
+        }
+        if (nibbles.hit) {
+            $('#loser-name').text(nibbles.loser.id);
+            $('#loser-hit').text(nibbles.hitTarget);
         }
     };
 };

@@ -1,7 +1,18 @@
 html
   head
     title= title
+    link(rel='stylesheet', href='/css/main.css')
+    script(src="/js/jquery.js")
     script(src="/js/p5/p5.js")
     script(src='/js/client.js')
   body
     h1= message
+    div(id='container').container
+      div(id='board').board
+      div(id='panel').panel
+        div(id='loser').loser
+          span Loser name:
+          span#loser-name
+          br
+          span Hit:
+          span#loser-hit

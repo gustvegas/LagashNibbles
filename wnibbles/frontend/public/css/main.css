@@ -1,0 +1,11 @@
+.container {
+    border: 1px solid blue;
+}
+.board {
+    display: inline-block;
+    border: 1px solid red;
+}
+.panel {
+    display: inline-block;
+    border: 1px solid green;
+}
