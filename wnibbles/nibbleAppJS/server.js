@@ -37,16 +37,52 @@ app.post('/nextMove', (req, res) => {
 	} else if(req.body.snake.direction == "Left") {
 			pos.x = req.body.snake.x - 1;
 	}
-	if((pos.x >= 0) && 
+	if(((pos.x >= 0) && 
 		(pos.y >= 0) &&
 		(pos.x < req.body.space.topX) && 
 		(pos.y < req.body.space.topY) &&
-		(req.body.space.map[pos.x][pos.y] == 0)) {
+		(req.body.space.map[pos.x][pos.y] == 0))) {
+
+		// Alguien alrededor?
+		let aroundEmpty = true;
+
+		// Valida que no haya nada cerca
+		// for(let i=-1; (i < 2) && aroundEmpty; i++) {
+		// 	for(let j=-1; (j < 2) && aroundEmpty; j++) {
+		// 		if((pos.x+i >= 0) && 
+		// 			(pos.y+j >= 0) &&
+		// 			(pos.x+i < req.body.space.topX) && 
+		// 			(pos.y+j < req.body.space.topY)) {
+		// 			if((req.body.space.map[pos.x+i][pos.y+j] != 0 && 
+		// 				  req.body.space.map[pos.x+i][pos.y+j] != req.body.snake.id)) {
+		// 				aroundEmpty = false;
+		// 			}
+		// 		}
+		// 	}		
+		// }
+
+		// Valida que no haya otra cebeza cerca
+		for(var i = 0; i < req.body.snakes.length; i++) {
+				var other = req.body.snakes[i];
+				if(other.id == req.body.snake.id) {
+						continue;
+				}
+				if( other.x > pos.x - 2 && 
+						other.x < pos.x + 2 && 
+						other.y > pos.y - 2 && 
+						other.y < pos.y + 2 ) {
+						aroundEmpty = false;
+						break;
+				}
+		}
+
+		if(aroundEmpty) {
 			res.json({ direction: req.body.snake.direction });
 			return;
+		}			
 	}
 
-  //TODO: validar que otro no pueda mover donde yo me muevo
+
 
 	//Busco nueva dirección clockwise para no chocarme
 	for(let i = 0; i < 4; i++) {

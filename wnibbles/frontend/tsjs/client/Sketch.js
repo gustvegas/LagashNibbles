@@ -1,10 +1,11 @@
 import { Nibbles } from './Nibbles';
+import { HttpBehavior } from './HttpBehavior';
 var sketch = function (p) {
     let BLOCK_SIZE = 10;
     let frameRate = 10;
     let nibbles;
     p.setup = function () {
-        nibbles = new Nibbles(2);
+        nibbles = new Nibbles(4, new HttpBehavior());
         nibbles.init();
         p.frameRate(frameRate);
         p.createCanvas(nibbles.SPACE_X * BLOCK_SIZE, nibbles.SPACE_Y * BLOCK_SIZE);

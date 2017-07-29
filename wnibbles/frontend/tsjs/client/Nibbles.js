@@ -1,6 +1,5 @@
 import { Snake } from './Snake';
 import { Space } from './Space';
-import { HttpBehavior } from './HttpBehavior';
 import { Direction } from './Direction';
 const WHITE = "#FFFFFF";
 const RED = "#FF0000";
@@ -12,7 +11,7 @@ const GRAY = "#808080";
 const ORANGE = "#FFA500";
 const TEAL = "#008080";
 export class Nibbles {
-    constructor(snakeCount) {
+    constructor(snakeCount, behavior) {
         this.SPACE_X = 30;
         this.SPACE_Y = 30;
         this.REDUCE_STEP = 5;
@@ -26,7 +25,7 @@ export class Nibbles {
         this.colors.push(GRAY);
         this.colors.push(WHITE);
         this.snakeCount = snakeCount;
-        this.setupRandom(snakeCount, new HttpBehavior());
+        this.setupRandom(snakeCount, behavior);
     }
     shuffle(array) {
         var currentIndex = array.length, temporaryValue, randomIndex;

@@ -5,7 +5,23 @@ export class DummyBehavior {
             let pos = snake.moveNew();
             if (pos.isValidInBounds(space)
                 && (space.map[pos.x][pos.y] == space.EMPTY)) {
-                return resolve(snake.direction);
+                let aroundEmpty = true;
+                for (var i = 0; i < snakes.length; i++) {
+                    var other = snakes[i];
+                    if (other.id == snake.id) {
+                        continue;
+                    }
+                    if (other.x > pos.x - 2 &&
+                        other.x < pos.x + 2 &&
+                        other.y > pos.y - 2 &&
+                        other.y < pos.y + 2) {
+                        aroundEmpty = false;
+                        break;
+                    }
+                }
+                if (aroundEmpty) {
+                    return resolve(snake.direction);
+                }
             }
             for (let i = 1; i <= 4; i++) {
                 let dir = Direction[Direction[i]];

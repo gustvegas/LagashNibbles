@@ -1,6 +1,8 @@
 /// <reference path="../../typings/p5js/p5.d.ts"/>
 
 import {Nibbles} from './Nibbles';
+import {DummyBehavior} from './DummyBehavior';
+import {HttpBehavior} from './HttpBehavior';
 import {Vector} from './Vector';
 
 var sketch = function(p) {
@@ -10,7 +12,7 @@ var sketch = function(p) {
     let nibbles: Nibbles;
 
     p.setup = function() {
-        nibbles = new Nibbles(2);
+        nibbles = new Nibbles(4, new HttpBehavior());
         nibbles.init();
 
         p.frameRate(frameRate);

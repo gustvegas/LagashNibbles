@@ -3,8 +3,6 @@ import {Vector} from './Vector';
 import {Snake} from './Snake';
 import {Space} from './Space';
 import {ISnakeBehavior} from './ISnakeBehavior';
-import {DummyBehavior} from './DummyBehavior';
-import {HttpBehavior} from './HttpBehavior';
 import {Direction} from './Direction';
 
 export type Color = "#FFFFFF" | "#FF0000" | "#0000FF" | "#008000" | "#FFFF00" | "#FF00FF" | "#808080" | "#FFA500" | "#008080";
@@ -43,7 +41,7 @@ export class Nibbles {
 
     inUpdate: boolean;
 
-    constructor(snakeCount: number) {
+    constructor(snakeCount: number, behavior: ISnakeBehavior) {
         this.colors = new Array<Color>();
         this.colors.push(RED);
         this.colors.push(GREEN);
@@ -54,7 +52,7 @@ export class Nibbles {
         this.colors.push(WHITE);
 
         this.snakeCount = snakeCount;
-        this.setupRandom(snakeCount, new HttpBehavior());
+        this.setupRandom(snakeCount, behavior);
     }
 
     shuffle(array: Array<Snake>) : Array<Snake> {
