@@ -132,6 +132,8 @@ export class NextMoveRoute extends BaseRoute {
    */
   public postNextMove(req: Request, res: Response, next: NextFunction) {
     
+    let body = req.body;
+    let ddd =  body.snake;
     let snake = new Snake(+req.body.snake.id);
     snake.x = +req.body.snake.x;
     snake.y = +req.body.snake.y;
@@ -177,8 +179,7 @@ export class NextMoveRoute extends BaseRoute {
     this.json(req, res, payload);
   }
 
-  randomIntFromInterval(min,max)
-  {
+  randomIntFromInterval(min,max) {
       return Math.floor(Math.random()*(max-min+1)+min);
   }
   

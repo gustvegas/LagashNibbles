@@ -19,21 +19,21 @@ export class HttpBehavior {
                     "topY": space.topY,
                     "map": space.map
                 },
+                "snakes": snakes
             };
-            let settings = {
-                data: payload,
-                method: "post",
+            jQuery.ajax({
+                url: 'http://localhost:8088/nextMove',
+                data: JSON.stringify(payload),
                 dataType: 'json',
-                async: false,
-                timeout: 0,
+                contentType: 'application/json',
+                type: 'POST',
                 success: function (result) {
                     let newDir = Direction[result.direction];
                     if (result.isOk == false)
                         console.log(result);
                     return resolve(newDir);
-                },
-            };
-            jQuery.ajax('http://localhost:8088/nextMove', settings);
+                }
+            });
         });
     }
 }

@@ -48,6 +48,7 @@ export class BaseRoute {
    * @return void
    */
   public render(req: Request, res: Response, view: string, options?: Object) {
+
     //add constants
     res.locals.BASE_URL = "/";
 

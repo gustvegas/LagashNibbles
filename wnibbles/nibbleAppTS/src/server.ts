@@ -76,19 +76,29 @@ export class Server {
 	  //use logger middlware
 	  this.app.use(logger("dev"));
 
-	  //use json form parser middlware
-	  this.app.use(bodyParser.json());
+		//allow CORS calls
+		this.app.use(function(req, res, next) {
+				res.header('Access-Control-Allow-Origin', '*');
+				res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+				res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
+
+				// intercept OPTIONS method
+				if ('OPTIONS' == req.method) {
+					res.send(200);
+				}
+				else {
+					next();
+				}
+		});
+
+		//use json form parser middlware
+	  this.app.use(bodyParser.json({
+    }));
 
 	  //use query string parser middlware
 	  this.app.use(bodyParser.urlencoded({
 	    extended: true
 	  }));
-
-	  //use cookie parker middleware middlware
-	  this.app.use(cookieParser("SECRET_GOES_HERE"));
-
-	  //use override middlware
-	  this.app.use(methodOverride());
 
 	  //catch 404 and forward to error handler
 	  this.app.use(function(err: any, req: express.Request, res: express.Response, next: express.NextFunction) {

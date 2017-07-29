@@ -52,7 +52,7 @@ export class Nibbles {
         this.colors.push(WHITE);
 
         this.snakeCount = snakeCount;
-        this.setupRandom(snakeCount, new DummyBehavior());
+        this.setupRandom(snakeCount, new HttpBehavior());
     }
 
     shuffle(array: Array<Snake>) : Array<Snake> {

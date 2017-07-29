@@ -76,7 +76,7 @@ export class BaseRoute {
     //add constants
     res.locals.BASE_URL = "/";
 
-    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Origin", "http://localhost:8080");
 
     //render json
     res.json(body);

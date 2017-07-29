@@ -1,6 +1,6 @@
 import { Snake } from './Snake';
 import { Space } from './Space';
-import { DummyBehavior } from './DummyBehavior';
+import { HttpBehavior } from './HttpBehavior';
 import { Direction } from './Direction';
 const WHITE = "#FFFFFF";
 const RED = "#FF0000";
@@ -26,7 +26,7 @@ export class Nibbles {
         this.colors.push(GRAY);
         this.colors.push(WHITE);
         this.snakeCount = snakeCount;
-        this.setupRandom(snakeCount, new DummyBehavior());
+        this.setupRandom(snakeCount, new HttpBehavior());
     }
     shuffle(array) {
         var currentIndex = array.length, temporaryValue, randomIndex;

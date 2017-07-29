@@ -78,15 +78,6 @@ export class Server {
     //use json form parser middlware
     this.app.use(bodyParser.json());
 
-    //use query string parser middlware
-    this.app.use(bodyParser.urlencoded({
-      extended: true,
-      parameterLimit: 10000000
-    }));
-
-    //use cookie parker middleware middlware
-    this.app.use(cookieParser("SECRET_GOES_HERE"));
-
     //use override middlware
     this.app.use(methodOverride());
 
