@@ -38,11 +38,9 @@ export class Nibbles {
 
     snakes: Array<Snake>;
 
-    snakeCount: number;
-
     inUpdate: boolean;
 
-    constructor(snakeCount: number, behavior: ISnakeBehavior, spacex: number, spacey: number) {
+    constructor(spacex: number, spacey: number) {
         this.colors = new Array<Color>();
         this.colors.push(RED);
         this.colors.push(GREEN);
@@ -54,8 +52,6 @@ export class Nibbles {
 
         this.SPACE_X = spacex;
         this.SPACE_Y = spacey;
-        this.snakeCount = snakeCount;
-        this.setupRandom(snakeCount, behavior);
     }
 
     shuffle(array: Array<Snake>) : Array<Snake> {
@@ -80,22 +76,31 @@ export class Nibbles {
         return Math.floor(Math.random()*(max-min+1)+min);
     }
 
-    setupRandom(qty: number, behavior: ISnakeBehavior) {
+    clearSnakes() {
         this.snakes = new Array<Snake>();
-        for(let i: number = 0; i < qty; i++) {
-            let snake = new Snake(i+1);
-            snake.color = this.colors[i];
-            snake.behavior = behavior;
-            this.snakes.push(snake);
+    }
+
+    addSnake(id: number, behavior: ISnakeBehavior) {
+        if(this.snakes == null) {
+            this.snakes = new Array<Snake>();
         }
-        this.loser = null;
+        let snake = new Snake(id);
+        snake.color = this.colors[this.snakes.length];
+        snake.behavior = behavior;
+        this.snakes.push(snake);
+    }
+
+    init() {
+        // Reset space
         this.space = new Space(this.SPACE_X, this.SPACE_Y);
-        for(let i: number = 0; i < qty; i++) {
+
+        // Place snakes at random place
+        for(let i: number = 0; i < this.snakes.length; i++) {
             let snake = this.snakes[i];
             snake.x = this.randomIntFromInterval(0, this.SPACE_X-1);
             snake.y = this.randomIntFromInterval(0, this.SPACE_Y-1);
             snake.direction = Direction[Direction[this.randomIntFromInterval(1,4)]];
-            
+
             // If snake placed in borders ensure a safe direction
             for(let i: number = 1; i <= 4; i++) {
                 let direction = Direction[Direction[i]];
@@ -106,18 +111,17 @@ export class Nibbles {
                 }
             }
         }
-    }
 
-    init() {
-        this.loser = null;
-        this.loser2 = null;
-        this.space = new Space(this.SPACE_X, this.SPACE_Y);
-        
+        // Keep head at the map
         for(let i: number = 0; i < this.snakes.length; i++) {
             let snake = this.snakes[i];
             this.space.map[snake.x][snake.y] = snake.id;
         }
-        //printSnakes(snakes);
+
+        // Reset execution flags
+        this.loser = null;
+        this.loser2 = null;
+        this.hit = false;
     }
 
     update() {
@@ -135,10 +139,6 @@ export class Nibbles {
             for(let i: number = 0; i < newList.length; i++) {
                 let snake = newList[i];
                 snake.ticks = this.ticks;
-                if(debug) {
-                    // space.printSpace();
-                    // printSnakes(snakes);
-                }
                 directions.push(snake.behavior.changeDirection(snake, this.space, this.snakes));
             }
             
@@ -155,11 +155,6 @@ export class Nibbles {
                         if(snake.willHitNextStep(this.space)) {
                             this.loser = snake;
                             idx = snake.willHitNextStepInfo(this.space);
-                            if(debug) {
-                                // System.out.println(String.format("Hit: %d:%d", snake.getId(), idx));
-                                // space.printSpace();
-                                // this.printSnakes(snakes);
-                            }
                             this.hit = true;
                             this.hitTarget = idx;
                             if(idx != -1 && idx != this.loser.id) {

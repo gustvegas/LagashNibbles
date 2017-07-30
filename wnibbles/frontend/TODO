@@ -1,5 +1,4 @@
-- Register Endpoints
-- Num players
+- Keep color in def
 - Select players
-- Execute without reload
+- Keep Points
 - Test with Docker

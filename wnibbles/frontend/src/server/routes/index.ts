@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response, Router } from "express";
 import { BaseRoute } from "./route";
-
+import * as fs from "fs";
 
 /**
  * / route
@@ -47,12 +47,17 @@ export class IndexRoute extends BaseRoute {
     //set custom title
     this.title = "Lagash Nibbles Contest!";
 
-    //set options
-    let options: Object = {
-      "message": "Lagash Nibbles Contest!"
-    };
+    let me = this;
+    fs.readFile("./public/endpoints.json", function (err, data) {
+      //set options
+      let options: Object = {
+        "message": "Lagash Nibbles Contest!",
+        "endpoints": JSON.parse(data.toString())
+      };
 
-    //render template
-    this.render(req, res, "index", options);
+      //render template
+      me.render(req, res, "index", options);
+    });
+
   }
 }

@@ -47,7 +47,7 @@ module.exports = function(grunt) {
     },
     watch: {
       ts: {
-        files: ["./src","./dist"],
+        files: ["./src"],
         tasks: ["ts", "browserify", "clean"]
       },
       ts2: {
@@ -55,11 +55,11 @@ module.exports = function(grunt) {
         tasks: ["browserify", "clean"]
       },
       views: {
-        files: ["views"],
+        files: ["./views"],
         tasks: ["copy"]
       },
       public: {
-        files: ["public"],
+        files: ["./public"],
         tasks: ["copy"]
       }
     },
@@ -73,7 +73,10 @@ module.exports = function(grunt) {
     },
     nodemon: {
       dev: {
-        script: './bin/www'
+        script: './bin/www',
+        options: {
+          nodeArgs: ['-inspect']
+        }
       }
     },
     clean: ['*.tmp.txt'],
@@ -102,7 +105,7 @@ module.exports = function(grunt) {
     "copy",
     "ts",
     "browserify",
-    //"clean"
+    "clean"
   ]);
 
   grunt.registerTask("run", [

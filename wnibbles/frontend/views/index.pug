@@ -7,10 +7,16 @@ html
     script(src='/js/client.js')
   body
     h1= message
+    div(id='endpoints-data', class='hidden', data-endpoints=endpoints)
     div(id='container').container
       div(id='board').board
       div(id='panel').panel
         div(id='loser').loser
+          ul#endpoints
+            each endpoint in endpoints.endpoints
+              li(style={'background-color': endpoint.color})
+                input(type="checkbox", name=endpoint.name, id=endpoint.name, value=endpoint.id) 
+                span=endpoint.name + " : " + endpoint.url
           span Loser name:
           span#loser-name
           br

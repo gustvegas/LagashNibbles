@@ -9,13 +9,10 @@ import {Vector} from './Vector';
 let nibbles: Nibbles;
 let started: boolean = false;
 let BLOCK_SIZE = 10;
-let frameRate: number = 10;
 
 var sketch = function(p) {
 
     p.setup = function() {
-        let canvas = p.createCanvas(nibbles.SPACE_X * BLOCK_SIZE, nibbles.SPACE_Y * BLOCK_SIZE);
-        canvas.parent('board');
     };
 
     p.draw = function() {
@@ -36,7 +33,8 @@ var sketch = function(p) {
             if(nibbles.hit && 
                (nibbles.loser.id == snake.id ||
                 (nibbles.loser2 != null && nibbles.loser2.id == snake.id))) {
-                p.stroke('#FFFFFF');
+                let col = p.lerpColor(p.color(snake.color), p.color('#000000'), .5);
+                p.stroke(col);
             }
             p.rect(snake.x * BLOCK_SIZE, snake.y * BLOCK_SIZE, BLOCK_SIZE-1, BLOCK_SIZE-1);
 
@@ -59,9 +57,11 @@ var sketch = function(p) {
         //update Loser
         if(nibbles.hit) {
             $('#loser-name').text(nibbles.loser.id);
+            $('#loser-name').css('background-color', nibbles.loser.color);
             $('#loser-hit').text(nibbles.hitTarget);
             if(nibbles.loser2 != null) {
                 $('#loser-2-name').text(nibbles.loser2.id);                
+                $('#loser-2-name').css('background-color', nibbles.loser2.color);
             }
         }
     };
@@ -70,23 +70,39 @@ var sketch = function(p) {
 $(document).ready(()=>{
     let spacex = +$('#topX').val();
     let spacey = +$('#topY').val();
-    nibbles = new Nibbles(1, new DummyBehavior(), spacex, spacey);
+
     let myp5 = new p5(sketch);
+    let canvas = myp5.createCanvas(spacex * BLOCK_SIZE, spacey * BLOCK_SIZE);
+    canvas.parent('board');
 
     $('#start').click(()=>{
         $('#loser-name').text("");
         $('#loser-hit').text("");
         $('#loser-2-name').text("");
-        frameRate = +$('#framerate').val();
 
+        let frameRate = +$('#framerate').val();
         let spacex = +$('#topX').val();
         let spacey = +$('#topY').val();
-        nibbles = new Nibbles(4, new DummyBehavior(), spacex, spacey);
-        
+        let endpoints = JSON.parse($('#endpoints-data').attr('data-endpoints'));
+
+        nibbles = new Nibbles(spacex, spacey);
+        nibbles.clearSnakes();
+        for(var i = 0; i < endpoints.endpoints.length; i++ ) {
+            let endpoint = endpoints.endpoints[i];
+
+            let checked = $("input:checked").toArray();
+            let elem = checked.find( (e) => {
+                return $(e).val() == endpoint.id;
+            });
+            if(elem != null) {
+                nibbles.addSnake(i+1, new DummyBehavior());
+            }
+        }
+        nibbles.init();
+
         myp5.frameRate(frameRate);
         myp5.resizeCanvas(spacex * BLOCK_SIZE, spacey * BLOCK_SIZE);
 
-        nibbles.init();
         started = true;
     });
 });
