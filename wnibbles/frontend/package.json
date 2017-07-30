@@ -2,22 +2,19 @@
   "name": "wnibbles",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "author": "Diego Gonzalez",
   "scripts": {
     "dev": "NODE_ENV=development nodemon --inspect ./bin/www",
     "start": "node ./bin/www",
     "grunt": "grunt",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.17.2",
-    "cookie-parser": "^1.4.3",
     "errorhandler": "^1.5.0",
     "express": "^4.15.3",
     "jquery": "^3.2.1",
-    "method-override": "^2.3.9",
     "morgan": "^1.8.2",
     "p5": "^0.5.11",
     "pug": "^2.0.0-rc.2"

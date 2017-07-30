@@ -1,8 +1,12 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const logger = require("morgan");
+
 const app = express();
 
 app.use(bodyParser.json());
+
+app.use(logger("dev"));
 
 //allow CORS calls
 app.use(function(req, res, next) {
@@ -46,26 +50,11 @@ app.post('/nextMove', (req, res) => {
 		// Alguien alrededor?
 		let aroundEmpty = true;
 
-		// Valida que no haya nada cerca
-		// for(let i=-1; (i < 2) && aroundEmpty; i++) {
-		// 	for(let j=-1; (j < 2) && aroundEmpty; j++) {
-		// 		if((pos.x+i >= 0) && 
-		// 			(pos.y+j >= 0) &&
-		// 			(pos.x+i < req.body.space.topX) && 
-		// 			(pos.y+j < req.body.space.topY)) {
-		// 			if((req.body.space.map[pos.x+i][pos.y+j] != 0 && 
-		// 				  req.body.space.map[pos.x+i][pos.y+j] != req.body.snake.id)) {
-		// 				aroundEmpty = false;
-		// 			}
-		// 		}
-		// 	}		
-		// }
-
 		// Valida que no haya otra cebeza cerca
 		for(var i = 0; i < req.body.snakes.length; i++) {
 				var other = req.body.snakes[i];
 				if(other.id == req.body.snake.id) {
-						continue;
+					continue;
 				}
 				if( other.x > pos.x - 2 && 
 						other.x < pos.x + 2 && 
@@ -81,8 +70,6 @@ app.post('/nextMove', (req, res) => {
 			return;
 		}			
 	}
-
-
 
 	//Busco nueva dirección clockwise para no chocarme
 	for(let i = 0; i < 4; i++) {
@@ -124,7 +111,7 @@ app.post('/nextMove', (req, res) => {
 	res.json({ direction: req.body.snake.direction });
 });
 
-const port = 9091;
+const port = 9000;
 app.listen(port, () => {
-  console.log('We are live on ' + port);
+ console.log("Listening on " + port);
 });

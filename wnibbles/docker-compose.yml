@@ -1,0 +1,12 @@
+version: '3'
+services:
+  nibblejs:
+    build: 
+      context: ./nibbleappjs
+    ports:
+      - "9091:9000"
+  nibblets:
+    build:
+      context: ./nibbleappts
+    ports:
+      - "9092:9000"

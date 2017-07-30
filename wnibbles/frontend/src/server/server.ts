@@ -1,10 +1,8 @@
 import * as bodyParser from "body-parser";
-import * as cookieParser from "cookie-parser";
 import * as express from "express";
 import * as logger from "morgan";
 import * as path from "path";
 import errorHandler = require("errorhandler");
-import methodOverride = require("method-override");
 import { IndexRoute } from "./routes/index";
 
 /**
@@ -77,9 +75,6 @@ export class Server {
 
     //use json form parser middlware
     this.app.use(bodyParser.json());
-
-    //use override middlware
-    this.app.use(methodOverride());
 
     //catch 404 and forward to error handler
     this.app.use(function(err: any, req: express.Request, res: express.Response, next: express.NextFunction) {
