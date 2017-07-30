@@ -1,10 +1,18 @@
 import * as jQuery from 'jquery';
+import * as url from 'url';
 import {ISnakeBehavior} from './ISnakeBehavior';
 import {Space} from './Space';
 import {Snake} from './Snake';
 import {Direction} from './Direction';
 
 export class HttpBehavior implements ISnakeBehavior {
+    endpoint: string;
+
+    constructor(endpoint: string) {
+        let purl = url.parse(endpoint);
+        this.endpoint = endpoint;
+    }
+
     changeDirection(snake: Snake, space: Space, snakes: Array<Snake>) : Promise<Direction> {
         return new Promise((resolve,reject) => {
             let payloadSnake: object = {
@@ -38,7 +46,7 @@ export class HttpBehavior implements ISnakeBehavior {
                 "snakes": payloadSnakes
             }
             jQuery.ajax({
-                url: 'http://localhost:8000/nextMove',
+                url: this.endpoint, //'http://localhost:8000/nextMove',
                 data: JSON.stringify(payload),
                 dataType: 'json',
                 contentType: 'application/json',
@@ -49,17 +57,6 @@ export class HttpBehavior implements ISnakeBehavior {
                     return resolve(newDir);
                 }
             });
-
-            // jQuery.post(
-            //     'http://localhost:8088/nextMove',
-            //     JSON.stringify(payload),
-            //     function (result) {
-            //         let newDir: Direction = (<any>Direction)[result.direction];
-            //         if (result.isOk == false) console.log(result);
-            //         return resolve(newDir);
-            //     },
-            //     'json');
         });
-
     }
 }

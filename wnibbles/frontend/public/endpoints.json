@@ -4,25 +4,25 @@
             "id": 1,
             "name": "A",
             "color": "red",
-            "url": "http://localhost:8000/nextMove"
+            "url": "http://localhost:9091/nextMove"
         },
         {
             "id": 2,
             "name": "B",
             "color": "blue",
-            "url": "http://localhost:8000/nextMove"
+            "url": "http://localhost:9092/nextMove"
         },
         {
             "id": 3,
             "name": "C",
             "color": "green",
-            "url": "http://localhost:8000/nextMove"
+            "url": "http://localhost:9091/nextMove"
         },
         {
             "id": 4,
             "name": "D",
             "color": "yellow",
-            "url": "http://localhost:8000/nextMove"
+            "url": "http://localhost:9092/nextMove"
         }
     ]
 }

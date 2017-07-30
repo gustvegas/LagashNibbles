@@ -1,6 +1,6 @@
-const express        = require('express');
-const bodyParser     = require('body-parser');
-const app            = express();
+const express = require('express');
+const bodyParser = require('body-parser');
+const app = express();
 
 app.use(bodyParser.json());
 
@@ -124,8 +124,7 @@ app.post('/nextMove', (req, res) => {
 	res.json({ direction: req.body.snake.direction });
 });
 
-const port = 8000;
+const port = 9091;
 app.listen(port, () => {
   console.log('We are live on ' + port);
 });
-

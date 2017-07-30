@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "NODE_ENV=development nodemon --inspect ./bin/www",
     "grunt": "grunt",
-    "start": "node ./bin/www"
+    "start": "nodemon ./bin/www"
   },
   "dependencies": {
     "@types/request": "^2.0.0",
