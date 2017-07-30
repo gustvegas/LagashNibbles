@@ -90,7 +90,7 @@ $(document).ready(()=>{
         for(var i = 0; i < endpoints.endpoints.length; i++ ) {
             let endpoint = endpoints.endpoints[i];
 
-            let checked = $("input:checked").toArray();
+            let checked = $("#endpoints input:checked").toArray();
             let elem = checked.find( (e) => {
                 return $(e).val() == endpoint.id;
             });
