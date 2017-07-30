@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const logger = require("morgan");
+const errorHandler = require("errorhandler");
 
 const app = express();
 
@@ -23,11 +24,12 @@ app.use(function(req, res, next) {
 		}
 });
 
+//error handling
+app.use(errorHandler());
+
 var dirArray = ["Up", "Right", "Left", "Down"];
 
 app.post('/nextMove', (req, res) => {
-	console.log(req.method + " " + req.path);
-
 	let pos = {
 		x: req.body.snake.x,
 		y: req.body.snake.y

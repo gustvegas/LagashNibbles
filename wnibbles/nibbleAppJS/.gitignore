@@ -1,11 +1,3 @@
-#Exclude tsc generated files
-js/*.map
-js/ts.js
-.tscache/
-dist/
-*.tmp.txt
-tsjs/client/
-
 ### https://raw.github.com/github/gitignore/9f847e58591602162526ca9af339ed3ff4502252/Node.gitignore
 
 # Logs

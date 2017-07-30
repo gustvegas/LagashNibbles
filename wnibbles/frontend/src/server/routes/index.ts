@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response, Router } from "express";
-import { BaseRoute } from "./route";
 import * as fs from "fs";
+import * as path from "path";
+import { BaseRoute } from "./route";
 
 /**
  * / route
@@ -48,7 +49,7 @@ export class IndexRoute extends BaseRoute {
     this.title = "Lagash Nibbles Contest!";
 
     let me = this;
-    fs.readFile("./public/endpoints.json", function (err, data) {
+    fs.readFile(path.join(__dirname, "../../public/endpoints.json"), function (err, data) {
       //set options
       let options: Object = {
         "message": "Lagash Nibbles Contest!",

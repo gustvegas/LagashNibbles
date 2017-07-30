@@ -4,6 +4,7 @@
   "version": "1.0.0",
   "private": true,
   "author": "Diego Gonzalez",
+  "license": "MIT",
   "scripts": {
     "dev": "NODE_ENV=development nodemon --inspect ./bin/www",
     "grunt": "grunt",

@@ -92,13 +92,7 @@ export class Server {
 		});
 
 		//use json form parser middlware
-	  this.app.use(bodyParser.json({
-    }));
-
-	  //use query string parser middlware
-	  this.app.use(bodyParser.urlencoded({
-	    extended: true
-	  }));
+	  this.app.use(bodyParser.json());
 
 	  //catch 404 and forward to error handler
 	  this.app.use(function(err: any, req: express.Request, res: express.Response, next: express.NextFunction) {

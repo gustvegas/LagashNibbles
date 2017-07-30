@@ -1,5 +1,10 @@
 version: '3'
 services:
+  nibbles:
+    build: 
+      context: ./frontend
+    ports:
+      - "9090:9000"
   nibblejs:
     build: 
       context: ./nibbleappjs
