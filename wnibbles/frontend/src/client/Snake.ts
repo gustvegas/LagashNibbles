@@ -1,7 +1,6 @@
 import {Vector} from './Vector';
 import {Space} from './Space';
 import {ISnakeBehavior} from './ISnakeBehavior';
-import {Color} from './Nibbles';
 import {Direction} from './Direction';
 
 export class Snake extends Vector {
@@ -9,7 +8,7 @@ export class Snake extends Vector {
     ticks: number;
     trail: Array<Vector>;
     length: number;
-    color: Color;
+    color: string;
     behavior: ISnakeBehavior;
 
     constructor(id: number) {

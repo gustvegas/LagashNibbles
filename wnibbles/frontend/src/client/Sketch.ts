@@ -95,7 +95,7 @@ $(document).ready(()=>{
                 return $(e).val() == endpoint.id;
             });
             if(elem != null) {
-                nibbles.addSnake(i+1, new DummyBehavior());
+                nibbles.addSnake(i+1, endpoint.color, new DummyBehavior());
             }
         }
         nibbles.init();

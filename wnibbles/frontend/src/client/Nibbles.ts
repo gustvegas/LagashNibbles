@@ -5,17 +5,6 @@ import {Space} from './Space';
 import {ISnakeBehavior} from './ISnakeBehavior';
 import {Direction} from './Direction';
 
-export type Color = "#FFFFFF" | "#FF0000" | "#0000FF" | "#008000" | "#FFFF00" | "#FF00FF" | "#808080" | "#FFA500" | "#008080";
-const WHITE: Color = "#FFFFFF";
-const RED: Color = "#FF0000";
-const BLUE: Color = "#0000FF";
-const GREEN: Color = "#008000";
-const YELLOW: Color = "#FFFF00";
-const MAGENTA: Color = "#FF00FF";
-const GRAY: Color = "#808080";
-const ORANGE: Color = "#FFA500";
-const TEAL: Color = "#008080";
-
 export class Nibbles {
     SPACE_X : number  = 30;
     
@@ -25,31 +14,21 @@ export class Nibbles {
 
     ticks : number = 0;
 
-    colors : Array<Color>;
+    space: Space;
+
+    snakes: Array<Snake>;
 
     loser: Snake;
-    loser2: Snake;
 
-    space: Space;
+    loser2: Snake;
 
     hit: boolean;
 
     hitTarget: number;
 
-    snakes: Array<Snake>;
-
     inUpdate: boolean;
 
     constructor(spacex: number, spacey: number) {
-        this.colors = new Array<Color>();
-        this.colors.push(RED);
-        this.colors.push(GREEN);
-        this.colors.push(BLUE);
-        this.colors.push(YELLOW);
-        this.colors.push(MAGENTA);
-        this.colors.push(GRAY);
-        this.colors.push(WHITE);
-
         this.SPACE_X = spacex;
         this.SPACE_Y = spacey;
     }
@@ -80,12 +59,12 @@ export class Nibbles {
         this.snakes = new Array<Snake>();
     }
 
-    addSnake(id: number, behavior: ISnakeBehavior) {
+    addSnake(id: number, color: string, behavior: ISnakeBehavior) {
         if(this.snakes == null) {
             this.snakes = new Array<Snake>();
         }
         let snake = new Snake(id);
-        snake.color = this.colors[this.snakes.length];
+        snake.color = color;
         snake.behavior = behavior;
         this.snakes.push(snake);
     }
