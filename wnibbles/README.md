@@ -1,5 +1,7 @@
 # Lagash Nibbles
 
+![Game Image](/Users/diegog/Source/nibbles/wnibbles/images/sample50x50_2.png "Game Image")
+
 El juego consiste en controlar una serpiente en un espacio fijo de dos dimensiones evitando que ésta colisione con los bordes o con los otros jugadores. En cada turno la serpiente se desplaza una posición, y cada cinco turnos la serpiente incrementa su tamaño.
 
 El juego termina cuando un jugador colisiona siendo dicho jugador el perdedor y el resto de los jugadores se considera ganadores. Existe un caso especial en el cual dos serpientes colisionan en su cabeza, en dicho caso ambos se consideran perdedores.
@@ -10,6 +12,12 @@ El desafío del juego es crear un programa que controle la serpiente y que sea l
 Para participar del juego es necesario crear un programa que atienda en un *Endpoint* una llamada REST devolviendo al control central la nueva dirección, en caso que desee cambiarla. 
 
 En cada turno todos los jugadores son consutados al mismo tiempo y se les envía el mismo estado de juego, una vez que todos han respondido, se aplican los cambios en el juego y se vuelve a solicitar una nueva decisión. Para evitar que el orden de juego impacte en el desempeño cada turno se cambia el orden en el que se aplican los cambios.
+
+Se incluyen a modo de ejemplo dos programas que implementan un comportamiento simple que evitan colisiones mediante la selección de la dirección siguiendo las agujas del reloj:
+- `NibbleAppJS`. Una implementación en JavaScript plano, usando Express en NodeJS.
+- `NibbleAppTS`. Una implementación en TypeScript usando Express en NodeJS.
+
+Se pueden ver en juego estas dos implementaciones utilizando el código de ejemplo y tener un competidor de referencia para probar el desarrollo del nuevo controlador.
 
 ## Método REST
 La definicion en Swagger del API que debe implementarse es parte del código, con lo cual las serpientes pueden programarse en cualquier lenguaje. La información que se le envía en cada pedido de decisión es:
@@ -56,6 +64,72 @@ Para limpiar el entorno (imágenes de docker creadas, contenedores, etc) se cuen
 
 Nota: El entorno asume que los puertos 9090, 9091 y 9092 se encuentran libres, si esto no fuera así, se puede hacer el cambio en el archivo `docker-compose.yml` en la sección `ports`.
 
- ## El código fuente
+ ## El código fuente del DummyBehavior en TypeScript
 
- ## 
+Se inicia instanciando una clase de soporte llamada `Snake` que mantiene los datos del JSON enviado en el request.
+```typescript
+    let snake = new Snake(+req.body.snake.id);
+    snake.x = +req.body.snake.x;
+    snake.y = +req.body.snake.y;
+    let direction: Direction = (<any>Direction)[req.body.snake.direction];
+    snake.direction = direction;
+    snake.ticks = +req.body.snake.ticks;
+    snake.trail = req.body.snake.trail;
+```
+
+Se leen los datos del espacio de juego y se guardan en la clase `Space`:
+```typescript
+    let space = new Space(req.body.space.topX, req.body.space.topY);
+    space.map = req.body.space.map;
+```
+
+Se guarda la dirección actual en la variable `newDirection` y se llama al método de soporte `noveNew()`, que devuelve un `Vector` posicionado en el lugar donde se movería la serpiente siguiendo en la misma dirección. Esa posición se guarda en la variable `pos`.
+
+```typescript
+    let newDirection = snake.direction;
+    // Si no me choco adelante, sigo igual
+    let pos = snake.moveNew();
+```
+
+Se utiliza el método de soporte `isValidInBounds()` para determinar si la nueva posición está dentro de los límites del espacio de juego. Y luego se procede a verificar que en dicha posición no haya otro jugador, mediante el uso de la información de `space.map[x][y]`, si el valor está en 0, quiere decir que el espacio está libre. Si así fuera, decide mantener la misma dirección.
+```typescript
+    if(pos.isValidInBounds(space)
+        && (space.map[pos.x][pos.y] == space.EMPTY)) {
+        newDirection = snake.direction;                
+    }else{
+```
+
+Si no pudiera moverse a la posición mencionada se procederá a elegir una nueva dirección, para ello se procederá a iterar por las distintas direcciones posibles. En cada dirección, si no se trata de la dirección opuesta a la original, se utiliza el método de soporte `moveNewDirection(direction)` que devuelve la posición a la que se movería la serpiente, pero utilizando la dirección provista en el parámetro, esta nueva posición se guarda en la variable `pos`, y se realizan distintas verificaciones:
+- Que esté dentro de los márgenes del juego.
+- Que no haya otro jugador en dicha posición.
+Cuando encuentra una dirección que satisface las validaciones, almacena dicha dirección en la variable `newDirection` e interrumpe la iteración con la nueva dirección.
+```typescript
+      //Busco nueva dirección clockwise para no chocarme
+      for(let i:number = 1; i <= 4; i++) {
+          let dir = Direction[Direction[i]];
+          if(snake.isOpositeDirection(dir)) {
+              continue;
+          }
+          pos = snake.moveNewDirection(dir);
+          if(!pos.isValidInBounds(space)) {
+              continue;
+          }
+          if(space.map[pos.x][pos.y] != space.EMPTY) {
+              continue;
+          }
+          newDirection = dir;
+          break;
+      }
+    }
+```
+
+Para finalizar se crea un objeto con la dirección seleccionada, para ser enviado al cliente.
+```typescript
+    let dstring: string = Direction[newDirection];
+    let payload: Object = {
+      direction: dstring,
+    };
+    
+    //render json
+    this.json(req, res, payload);
+```
