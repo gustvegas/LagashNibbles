@@ -19,6 +19,9 @@ module.exports = function(grunt) {
             up: {
                 command: 'docker-compose up',
             },
+            updev: {
+                command: 'docker-compose -f docker-compose-dev.yml up',
+            },
             down: {
                 command: 'docker-compose down --rmi all',
             }
@@ -29,6 +32,13 @@ module.exports = function(grunt) {
         'shell:buildFrontEnd', 
         'shell:buildNibbleTS']);
     grunt.registerTask('build', ['shell:build']);
-    grunt.registerTask('run', ['shell:up']);
+    grunt.registerTask('run', [ 
+        'shell:buildFrontEnd', 
+        'shell:buildNibbleTS', 
+        'shell:up']);
+    grunt.registerTask('rundev', [ 
+        'shell:buildFrontEnd', 
+        'shell:buildNibbleTS', 
+        'shell:updev']);
     grunt.registerTask('stop', ['shell:down']);
 }

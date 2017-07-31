@@ -62,9 +62,15 @@ Para limpiar el entorno (imágenes de docker creadas, contenedores, etc) se cuen
 
 `grunt down`
 
+Si están programando y cambiando el código pueden ejecutar más rápidamente el entorno compilando y reiniciando los contenedores con el comando:
+
+`grunt rundev`
+
 Nota: El entorno asume que los puertos 9090, 9091 y 9092 se encuentran libres, si esto no fuera así, se puede hacer el cambio en el archivo `docker-compose.yml` en la sección `ports`.
 
  ## El código fuente del DummyBehavior en TypeScript
+
+Es importante que el método permita la ejecución desde otros hosts (CORS), dado que será invocado desde el browser, en los ejemplos pueden ver los Headers necesarios para evitar esta validación en el browser.
 
 Se inicia instanciando una clase de soporte llamada `Snake` que mantiene los datos del JSON enviado en el request.
 ```typescript
