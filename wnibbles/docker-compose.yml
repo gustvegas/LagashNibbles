@@ -3,15 +3,23 @@ services:
   nibbles:
     build: 
       context: ./frontend
+    volumes:
+      - ./frontend/dist:/app/dist
+      - ./frontend/bin:/app/bin
     ports:
       - "9090:9000"
   nibblejs:
     build: 
       context: ./nibbleappjs
+    volumes:
+      - ./nibbleappjs/server.js:/app/server.js
     ports:
       - "9091:9000"
   nibblets:
     build:
-      context: ./nibbleappts
+      context: ./nibbleAppTS
+    volumes:
+      - ./nibbleAppTS/dist:/app/dist
+      - ./nibbleAppTS/bin:/app/bin
     ports:
       - "9092:9000"
