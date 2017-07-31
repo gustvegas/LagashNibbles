@@ -42,10 +42,13 @@ var sketch = function(p) {
                 p.stroke(col);
             }
             if(!drawName) {
-                p.rect(snake.x * BLOCK_SIZE, snake.y * BLOCK_SIZE, BLOCK_SIZE-1, BLOCK_SIZE-1);
+                p.rect(
+                    snake.x * BLOCK_SIZE, 
+                    snake.y * BLOCK_SIZE, 
+                    BLOCK_SIZE - 1, BLOCK_SIZE - 1);
             }
 
-            let pvec = snake.moveNewDirection( snake.getOpositeDirection() ); 
+            let pvec = snake.moveNewDirection(snake.getOpositeDirection());
             for(let t: number = snake.trail.length-1; t >= 0; t--) {
                 let vec = snake.trail[t];
 
@@ -59,9 +62,13 @@ var sketch = function(p) {
                 }
                 pvec = vec;
             }
-            if(!drawName) {
+            if(drawName) {
                 p.stroke('#000000');
-                p.text(snake.name, (snake.x * BLOCK_SIZE) - 5, (snake.y * BLOCK_SIZE) + 10);
+                if(snake.direction == Direction.Up || snake.direction == Direction.Down) {
+                    p.text(snake.name, (snake.x * BLOCK_SIZE), (snake.y * BLOCK_SIZE) + 10);
+                }else{
+                    p.text(snake.name, (snake.x * BLOCK_SIZE) - 5, (snake.y * BLOCK_SIZE) + 10);                    
+                }
             }
         }
 

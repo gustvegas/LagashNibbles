@@ -38,7 +38,7 @@ El método deve devolver la nueva dirección que puede ser uno de los siguientes
  ## ¿Cómo lo pruebo?
  El código fuente que se agrega contiene el FrontEnd que es el programa que coordina el juego, consulta a cada serpiente y aplica las decisiones manteniendo el estado del juego. Además imprime el estado del juego visualmente y decide quien es el perdedor de cada partida.
 
- Dentro del proyecto "frontend" se encuentra un archivo `public/endpoints.json` donde se puede registrar el *endpoint* y ya se puede comenzar a jugar. 
+ Dentro del proyecto `frontend` se encuentra un archivo `public/endpoints.json` donde se puede registrar el *endpoint* y ya se puede comenzar a jugar. El nombre de la serpiente puede ser Emoji y este se dibujará.
 
  Para facilitar la ejecución y evitar la instalación de dependencias, está distribuido como containers de Docker, y para levantar todo el ejemplo, se utiliza *docker-compose*.  Es importante tener instalado Docker en la máquina de desarrollo para acelerar el despliegue. También es necesario tener NodeJS y Grunt instalado en la máquina para poder ejecutar los comandos de compilación y deployment. Una vez instalado NodeJS, para instalar Grunt ejecutar en la consola, en cualquier directorio:
 
