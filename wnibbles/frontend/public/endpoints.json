@@ -2,7 +2,7 @@
     "endpoints": [
         {
             "id": 1,
-            "name": "A",
+            "name": "👾",
             "color": "red",
             "url": "http://localhost:9091/nextMove"
         },
@@ -14,13 +14,13 @@
         },
         {
             "id": 3,
-            "name": "C",
+            "name": "",
             "color": "green",
             "url": "http://localhost:9091/nextMove"
         },
         {
             "id": 4,
-            "name": "D",
+            "name": "🐛",
             "color": "yellow",
             "url": "http://localhost:9092/nextMove"
         }

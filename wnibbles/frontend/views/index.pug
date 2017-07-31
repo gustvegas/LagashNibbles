@@ -15,8 +15,11 @@ html
           ul#endpoints
             each endpoint in endpoints.endpoints
               li(style={'background-color': endpoint.color})
-                input(type="checkbox", name=endpoint.name, id=endpoint.name, value=endpoint.id) 
-                span=endpoint.name + " : " + endpoint.url
+                input(type="checkbox", name=endpoint.name, id=endpoint.name, value=endpoint.id)
+                if(endpoint.name != "")
+                  span=endpoint.name + " : " + endpoint.url
+                else
+                  span="🤦 : " + endpoint.url
           span Loser name:
           span#loser-name
           br

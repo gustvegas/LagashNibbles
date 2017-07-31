@@ -59,11 +59,14 @@ export class Nibbles {
         this.snakes = new Array<Snake>();
     }
 
-    addSnake(id: number, color: string, behavior: ISnakeBehavior) {
+    addSnake(id: number, name:string, color: string, behavior: ISnakeBehavior) {
         if(this.snakes == null) {
             this.snakes = new Array<Snake>();
         }
         let snake = new Snake(id);
+        if(name != null && name != ""){
+            snake.name = name;
+        }
         snake.color = color;
         snake.behavior = behavior;
         this.snakes.push(snake);

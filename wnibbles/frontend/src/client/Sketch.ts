@@ -4,6 +4,7 @@ import * as jQuery from 'jquery';
 import {Nibbles} from './Nibbles';
 import {DummyBehavior} from './DummyBehavior';
 import {HttpBehavior} from './HttpBehavior';
+import {Direction} from './Direction';
 import {Vector} from './Vector';
 
 let nibbles: Nibbles;
@@ -11,6 +12,7 @@ let started: boolean = false;
 let BLOCK_SIZE = 10;
 
 var sketch = function(p) {
+    let drawName : boolean = true;
 
     p.setup = function() {
     };
@@ -21,6 +23,9 @@ var sketch = function(p) {
             return;
         }
         nibbles.update();
+
+        p.textSize(14);
+        p.textFont('monospace', 14);
 
         // Draw the project status
         p.background(0);
@@ -36,9 +41,11 @@ var sketch = function(p) {
                 let col = p.lerpColor(p.color(snake.color), p.color('#000000'), .5);
                 p.stroke(col);
             }
-            p.rect(snake.x * BLOCK_SIZE, snake.y * BLOCK_SIZE, BLOCK_SIZE-1, BLOCK_SIZE-1);
+            if(!drawName) {
+                p.rect(snake.x * BLOCK_SIZE, snake.y * BLOCK_SIZE, BLOCK_SIZE-1, BLOCK_SIZE-1);
+            }
 
-            let pvec: Vector = snake;
+            let pvec = snake.moveNewDirection( snake.getOpositeDirection() ); 
             for(let t: number = snake.trail.length-1; t >= 0; t--) {
                 let vec = snake.trail[t];
 
@@ -51,6 +58,10 @@ var sketch = function(p) {
                         (pvec.x * BLOCK_SIZE) + 5, (pvec.y * BLOCK_SIZE) + 5);
                 }
                 pvec = vec;
+            }
+            if(!drawName) {
+                p.stroke('#000000');
+                p.text(snake.name, (snake.x * BLOCK_SIZE) - 5, (snake.y * BLOCK_SIZE) + 10);
             }
         }
 
@@ -96,6 +107,7 @@ $(document).ready(()=>{
             });
             if(elem != null) {
                 nibbles.addSnake(i+1, 
+                    endpoint.name,
                     endpoint.color, 
                     new HttpBehavior(endpoint.url));
             }

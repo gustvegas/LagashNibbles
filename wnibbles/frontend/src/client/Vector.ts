@@ -18,6 +18,18 @@ export class Vector extends Pos {
         return this.moveNewDirection(this.direction);
     }
 
+    getOpositeDirection() : Direction {
+        if(this.direction == Direction.Up) {
+            return Direction.Down;
+        } else if(this.direction == Direction.Right) {
+            return Direction.Left;
+        } else if(this.direction == Direction.Down) {
+            return Direction.Up;
+        } else if(this.direction == Direction.Left) {
+            return Direction.Right;
+        }
+    }
+
     isOpositeDirection(direction: Direction) : boolean {
         if(this.direction == Direction.Up) {
             return direction == Direction.Down;

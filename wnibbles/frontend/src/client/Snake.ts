@@ -6,6 +6,7 @@ import {Direction} from './Direction';
 export class Snake extends Vector {
     id: number;
     ticks: number;
+    name: string;
     trail: Array<Vector>;
     length: number;
     color: string;
@@ -15,6 +16,7 @@ export class Snake extends Vector {
         super();
         this.trail = new Array<Vector>();
         this.id = id;
+        this.name = '🤦';
     }
 
     step() {
