@@ -1,29 +1,36 @@
 html
   head
-    title= title
+    title="Lagash Nibbles Contest"
     link(rel='stylesheet', href='/css/main.css')
     script(src="/js/jquery.js")
     script(src="/js/p5/p5.js")
     script(src='/js/client.js')
   body
-    h1= message
+    header
+      img(src='https://www.lagash.com/img/logo.png', alt='Lagash Logo')#lagashLogo
+      h1="Nibbles Contest"
     div(id='endpoints-data', class='hidden', data-endpoints=endpoints)
     div(id='container').container
       div(id='board').board
       div(id='panel').panel
+        ul#endpoints
+          li
+            input(type="checkbox", name='all', id='all')
+            span All
+          each endpoint in endpoints.endpoints
+            li(style={'background-color': endpoint.color})
+              input(type="checkbox", name=endpoint.name, id=endpoint.name, value=endpoint.id)
+              if(endpoint.name != "")
+                span=endpoint.name + " : " + endpoint.url
+              else
+                span="🤦 : " + endpoint.url
         div(id='loser').loser
-          ul#endpoints
-            each endpoint in endpoints.endpoints
-              li(style={'background-color': endpoint.color})
-                input(type="checkbox", name=endpoint.name, id=endpoint.name, value=endpoint.id)
-                if(endpoint.name != "")
-                  span=endpoint.name + " : " + endpoint.url
-                else
-                  span="🤦 : " + endpoint.url
-          span Loser name:
+          span Loser:
+          span#loser-id
           span#loser-name
           br
-          span Loser 2 name:
+          span Loser:
+          span#loser-2-id
           span#loser-2-name
           br
           span Hit:
@@ -40,4 +47,4 @@ html
           input(type='text', name='topX', id='topX', value='30')          
           input(type='text', name='topY', id='topY', value='30')          
           br
-          input(type='button', id='start', value='Start')
+          input(type='button', id='start', value='Start').button

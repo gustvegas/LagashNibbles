@@ -74,13 +74,15 @@ var sketch = function(p) {
 
         //update Loser
         if(nibbles.hit) {
-            $('#loser-name').text(nibbles.loser.id);
-            $('#loser-name').css('background-color', nibbles.loser.color);
-            $('#loser-hit').text(nibbles.hitTarget);
+            $('#loser-id').css('background-color', nibbles.loser.color);
+            $('#loser-id').text(nibbles.loser.id);
+            $('#loser-name').text(nibbles.loser.name);
             if(nibbles.loser2 != null) {
-                $('#loser-2-name').text(nibbles.loser2.id);                
-                $('#loser-2-name').css('background-color', nibbles.loser2.color);
+                $('#loser-2-id').css('background-color', nibbles.loser2.color);
+                $('#loser-2-id').text(nibbles.loser2.id);
+                $('#loser-2-name').text(nibbles.loser2.name);
             }
+            $('#loser-hit').text(nibbles.hitTarget);
         }
     };
 };
@@ -95,8 +97,10 @@ $(document).ready(()=>{
 
     $('#start').click(()=>{
         $('#loser-name').text("");
+        $('#loser-id').text("");
         $('#loser-hit').text("");
         $('#loser-2-name').text("");
+        $('#loser-2-id').text("");
 
         let frameRate = +$('#framerate').val();
         let spacex = +$('#topX').val();
@@ -125,5 +129,11 @@ $(document).ready(()=>{
         myp5.resizeCanvas(spacex * BLOCK_SIZE, spacey * BLOCK_SIZE);
 
         started = true;
+    });
+
+    $('#all').change((e) => {
+        $("#endpoints input")
+            .not($(e.currentTarget))
+            .prop('checked', $(e.currentTarget).prop('checked'));
     });
 });

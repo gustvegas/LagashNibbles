@@ -45,14 +45,11 @@ export class IndexRoute extends BaseRoute {
    * @next {NextFunction} Execute the next method.
    */
   public index(req: Request, res: Response, next: NextFunction) {
-    //set custom title
-    this.title = "Lagash Nibbles Contest!";
 
     let me = this;
     fs.readFile(path.join(__dirname, "../../public/endpoints.json"), function (err, data) {
       //set options
       let options: Object = {
-        "message": "Lagash Nibbles Contest!",
         "endpoints": JSON.parse(data.toString())
       };
 
