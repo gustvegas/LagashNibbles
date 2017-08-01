@@ -88,14 +88,11 @@ var sketch = function(p) {
 };
 
 $(document).ready(()=>{
-    let spacex = +$('#topX').val();
-    let spacey = +$('#topY').val();
 
     let myp5 = new p5(sketch);
-    let canvas = myp5.createCanvas(spacex * BLOCK_SIZE, spacey * BLOCK_SIZE);
-    canvas.parent('board');
 
     $('#start').click(()=>{
+
         $('#loser-name').text("");
         $('#loser-id').text("");
         $('#loser-hit').text("");
@@ -107,6 +104,8 @@ $(document).ready(()=>{
         let spacey = +$('#topY').val();
         let endpoints = JSON.parse($('#endpoints-data').attr('data-endpoints'));
 
+        let canvas = myp5.createCanvas(spacex * BLOCK_SIZE, spacey * BLOCK_SIZE);
+        canvas.parent('board');
         nibbles = new Nibbles(spacex, spacey);
         nibbles.clearSnakes();
         for(var i = 0; i < endpoints.endpoints.length; i++ ) {
