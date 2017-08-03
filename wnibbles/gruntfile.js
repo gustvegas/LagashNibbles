@@ -5,7 +5,7 @@ module.exports = function(grunt) {
     grunt.initConfig({
         shell: {
             options: {
-                stderr: false
+                stderr: true
             },
             buildFrontEnd: {
                 command: ['cd frontend', 'grunt'].join('&&'),
@@ -21,6 +21,9 @@ module.exports = function(grunt) {
             },
             updev: {
                 command: 'docker-compose -f docker-compose-dev.yml up',
+            },
+            runlocal: {
+                command: ['cd frontend', '(npm run local &) ', 'cd ..', 'cd nibbleAppTS', '(npm run local &)', 'cd ..', 'cd nibbleAppjS', '(npm run local &)'].join(' && '),
             },
             down: {
                 command: 'docker-compose down --rmi all',
@@ -41,4 +44,6 @@ module.exports = function(grunt) {
         'shell:buildNibbleTS', 
         'shell:updev']);
     grunt.registerTask('stop', ['shell:down']);
+    grunt.registerTask('runlocal', [ 
+        'shell:runlocal']);
 }

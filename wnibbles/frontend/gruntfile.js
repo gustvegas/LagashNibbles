@@ -41,7 +41,7 @@ module.exports = function(grunt) {
         options: {
           target: "es6",
           sourceMap: true,
-          rootDir: "src"
+          rootDir: "src",
          }
       }
     },
@@ -77,7 +77,10 @@ module.exports = function(grunt) {
         options: {
           nodeArgs: ['-inspect']
         }
-      }
+      },
+      env: {
+        PORT: '9090'
+      },
     },
     clean: ['*.tmp.txt'],
     browserify: {

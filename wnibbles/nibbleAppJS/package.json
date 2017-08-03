@@ -6,6 +6,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "NODE_ENV=development nodemon --inspect server.js",
+    "local": "NODE_ENV=development PORT=9091 nodemon --inspect=9231 server.js",
     "start": "nodemon server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
