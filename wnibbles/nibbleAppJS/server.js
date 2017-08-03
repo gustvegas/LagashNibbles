@@ -113,7 +113,24 @@ app.post('/nextMove', (req, res) => {
 	res.json({ direction: req.body.snake.direction });
 });
 
-const port = 9000;
-app.listen(port, () => {
- console.log("Listening on " + port);
+function normalizePort(val) {
+  var port = parseInt(val, 10);
+
+  if (isNaN(port)) {
+    // named pipe
+    return val;
+  }
+
+  if (port >= 0) {
+    // port number
+    return port;
+  }
+
+  return false;
+}
+
+var httpPort = normalizePort(process.env.PORT || 9000);
+
+app.listen(httpPort, () => {
+ console.log("Listening on " + httpPort);
 });
