@@ -1,9 +1,26 @@
+//import * as Enumerable from 'linq';
+var Enumerable = require('linq');
+
 import {Pos} from './Pos';
 import {Vector} from './Vector';
 import {Snake} from './Snake';
 import {Space} from './Space';
 import {ISnakeBehavior} from './ISnakeBehavior';
 import {Direction} from './Direction';
+
+class SpaceArea {
+    x: number;
+    y: number;
+    constructor(x: number, y: number) {
+        this.x = x;
+        this.y = y;
+    }
+
+    spaceX: number;
+    spaceY: number;
+    spaceTopX: number;
+    spaceTopY: number;
+}
 
 export class Nibbles {
     SPACE_X : number  = 30;
@@ -33,7 +50,7 @@ export class Nibbles {
         this.SPACE_Y = spacey;
     }
 
-    shuffle(array: Array<Snake>) : Array<Snake> {
+    shuffle<T>(array: Array<T>) : Array<T> {
         var currentIndex = array.length, temporaryValue, randomIndex;
 
         // While there remain elements to shuffle...
@@ -76,28 +93,64 @@ export class Nibbles {
         // Reset space
         this.space = new Space(this.SPACE_X, this.SPACE_Y);
 
-        // Place snakes at random place
-        for(let i: number = 0; i < this.snakes.length; i++) {
-            let snake = this.snakes[i];
-            snake.x = this.randomIntFromInterval(0, this.SPACE_X-1);
-            snake.y = this.randomIntFromInterval(0, this.SPACE_Y-1);
-            snake.direction = Direction[Direction[this.randomIntFromInterval(1,4)]];
+        // Divide areas en regiones, para que cada snake aparezca separada de otra
+        let spaceAreas = new Array<SpaceArea>();
+        let area = new SpaceArea(this.space.topX, this.space.topY);
+        spaceAreas.push(area);
+        for(var i = 2 ; i <= this.snakes.length; i++ ) {
+            let listq = Enumerable.from(spaceAreas);
+            area = listq.orderByDescending( t => { return t.x * t.y; } ).first();
+            let areaIndex = spaceAreas.findIndex( (val: SpaceArea) => {
+                return (val.x * val.y == area.x * area.y);
+            });
+            spaceAreas.splice(areaIndex,1);
 
-            // If snake placed in borders ensure a safe direction
-            for(let i: number = 1; i <= 4; i++) {
-                let direction = Direction[Direction[i]];
-                if(snake.willHitNextStep(this.space)) {
-                    snake.direction = direction;
-                } else {
-                    break;
-                }
+            let x = area.x;
+            let y = area.y;
+            if( x >= y ) {
+                x = Math.ceil(x / 2);
+            }else if ( x < y ) {
+                y = Math.ceil(y / 2);
             }
+            spaceAreas.push(new SpaceArea(x, y));
+            spaceAreas.push(new SpaceArea(x, y));
         }
 
-        // Keep head at the map
+        // Transpone areas al space
+        let curX = 0, curY = 0;
+        for(var i = 0; i < spaceAreas.length; i++) {
+            if( curX + spaceAreas[i].x > this.space.topX) {
+                curX = 0;
+                curY += spaceAreas[i].y;
+            }else if( curY + spaceAreas[i].y > this.space.topY) {
+                curY = 0;
+                curX += spaceAreas[i].x;
+            }
+            var topX = curX + spaceAreas[i].x;
+            var topY = curY + spaceAreas[i].y;
+
+            // Setea las cordenadas en SpaceArea
+            spaceAreas[i].spaceX = curX; 
+            spaceAreas[i].spaceY = curY;
+            spaceAreas[i].spaceTopX = topX; 
+            spaceAreas[i].spaceTopY = topY;
+
+            curX += spaceAreas[i].x;
+        }
+
+        // Reordeno el array para que cambie la posición de cada snake
+        spaceAreas = this.shuffle(spaceAreas);
+        
+        // Ubica al snake dentro de las areas
         for(let i: number = 0; i < this.snakes.length; i++) {
             let snake = this.snakes[i];
-            this.space.map[snake.x][snake.y] = snake.id;
+            let spaceArea = spaceAreas[i];
+            snake.x = this.randomIntFromInterval(spaceArea.spaceX+1, spaceArea.spaceTopX-1);
+            snake.y = this.randomIntFromInterval(spaceArea.spaceY+1, spaceArea.spaceTopY-1);
+            snake.direction = Direction[Direction[this.randomIntFromInterval(1,4)]];
+
+            // Guardo la cabeza en el mapa
+            this.space.map[snake.x][snake.y] = snake.id;            
         }
 
         // Reset execution flags
