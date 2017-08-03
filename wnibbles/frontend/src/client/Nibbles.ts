@@ -7,27 +7,12 @@ import {Snake} from './Snake';
 import {Space} from './Space';
 import {ISnakeBehavior} from './ISnakeBehavior';
 import {Direction} from './Direction';
-
-class SpaceArea {
-    x: number;
-    y: number;
-    constructor(x: number, y: number) {
-        this.x = x;
-        this.y = y;
-    }
-
-    spaceX: number;
-    spaceY: number;
-    spaceTopX: number;
-    spaceTopY: number;
-}
+import {SpaceArea} from './SpaceArea';
 
 export class Nibbles {
     SPACE_X : number  = 30;
     
     SPACE_Y : number = 30;
-
-    REDUCE_STEP : number = 5;
 
     ticks : number = 0;
 
@@ -170,6 +155,7 @@ export class Nibbles {
         if(!this.hit) {
             this.ticks++;
             let directions: Array<Promise<Direction>> = new Array<Promise<Direction>>();
+
             var newList = this.shuffle(this.snakes);
             for(let i: number = 0; i < newList.length; i++) {
                 let snake = newList[i];
@@ -204,7 +190,7 @@ export class Nibbles {
                         }
                         snake.step();
                         this.space.map[snake.x][snake.y] = snake.id;
-                        if(this.ticks % this.REDUCE_STEP == 0) {
+                        if(this.ticks % this.space.REDUCE_STEP == 0) {
                             let initial = snake.getTailPosition();
                             snake.reduceLength(1);
                             this.space.map[initial.x][initial.y] = this.space.EMPTY;

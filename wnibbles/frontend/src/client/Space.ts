@@ -1,3 +1,4 @@
+import {Snake} from './Snake';
 
 export class Space {
     topX: number;
@@ -5,6 +6,7 @@ export class Space {
     
     map: number[][];
     EMPTY: number = 0;
+    REDUCE_STEP: number = 5;
 
     constructor(x: number, y:number) {
         this.topX = x;
@@ -16,5 +18,18 @@ export class Space {
                 this.map[i][j] = this.EMPTY;
             }
         }
+    }
+
+    createSpace(snakes: Array<Snake>): Space {
+        var space = new Space(this.topX, this.topY);
+
+        for(var i:number = 0; i < snakes.length; i++) {
+            var snake = snakes[i];
+
+            for(var t: number = 0; t < snake.trail.length; t++) {
+
+            }
+        }
+        return 
     }
 }

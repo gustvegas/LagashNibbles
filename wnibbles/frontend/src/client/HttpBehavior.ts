@@ -41,7 +41,8 @@ export class HttpBehavior implements ISnakeBehavior {
                 "space": {
                     "topX": space.topX,
                     "topY": space.topY,
-                    "map": space.map
+                    "map": space.map,
+                    "step": space.REDUCE_STEP
                 },
                 "snakes": payloadSnakes
             }
