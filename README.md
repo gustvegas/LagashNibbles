@@ -1,6 +1,6 @@
 # Lagash Nibbles
 
-![Game Image Small](https://raw.githubusercontent.com/DiegoGLagash/LagashNibbles/master/wnibbles/images/sample30x30.png)
+![Game Image Small](https://raw.githubusercontent.com/DiegoGLagash/LagashNibbles/master/images/sample30x30.png)
 
 El juego consiste en controlar una serpiente en un espacio fijo de dos dimensiones evitando que ésta colisione con los bordes o con los otros jugadores. En cada turno la serpiente se desplaza una posición, y cada cinco turnos la serpiente incrementa su tamaño.
 
