@@ -10,9 +10,9 @@ export class Space {
         this.topX = x;
         this.topY = y;
         this.map = [];
-        for(var i:number = 0; i < x; i++) {
+        for(let i:number = 0; i < x; i++) {
             this.map[i] = [];
-            for(var j: number = 0; j< y; j++) {
+            for(let j: number = 0; j< y; j++) {
                 this.map[i][j] = this.EMPTY;
             }
         }

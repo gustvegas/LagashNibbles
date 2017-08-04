@@ -27,7 +27,7 @@ app.use(function(req, res, next) {
 //error handling
 app.use(errorHandler());
 
-var dirArray = ["Up", "Right", "Left", "Down"];
+let dirArray = ["Up", "Right", "Left", "Down"];
 
 app.post('/nextMove', (req, res) => {
 	let pos = {
@@ -53,8 +53,8 @@ app.post('/nextMove', (req, res) => {
 		let aroundEmpty = true;
 
 		// Valida que no haya otra cebeza cerca
-		for(var i = 0; i < req.body.snakes.length; i++) {
-				var other = req.body.snakes[i];
+		for(let i = 0; i < req.body.snakes.length; i++) {
+				let other = req.body.snakes[i];
 				if(other.id == req.body.snake.id) {
 					continue;
 				}
@@ -114,7 +114,7 @@ app.post('/nextMove', (req, res) => {
 });
 
 function normalizePort(val) {
-  var port = parseInt(val, 10);
+  let port = parseInt(val, 10);
 
   if (isNaN(port)) {
     // named pipe
@@ -129,7 +129,7 @@ function normalizePort(val) {
   return false;
 }
 
-var httpPort = normalizePort(process.env.PORT || 9000);
+const httpPort = normalizePort(process.env.PORT || 9000);
 
 app.listen(httpPort, () => {
  console.log("Listening on " + httpPort);

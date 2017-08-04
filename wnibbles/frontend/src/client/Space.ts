@@ -12,22 +12,25 @@ export class Space {
         this.topX = x;
         this.topY = y;
         this.map = [];
-        for(var i:number = 0; i < x; i++) {
+        for(let i:number = 0; i < x; i++) {
             this.map[i] = [];
-            for(var j: number = 0; j< y; j++) {
+            for(let j: number = 0; j< y; j++) {
                 this.map[i][j] = this.EMPTY;
             }
         }
     }
 
     createSpace(snakes: Array<Snake>): Space {
-        var space = new Space(this.topX, this.topY);
+        let space = new Space(this.topX, this.topY);
 
-        for(var i:number = 0; i < snakes.length; i++) {
-            var snake = snakes[i];
+        for(let i:number = 0; i < snakes.length; i++) {
+            let snake = snakes[i];
+    
+            space.map[snake.x][snake.y] = snake.id;
+            for(let t: number = 0; t < snake.trail.length; t++) {
+                let trail = snake.trail[t];
 
-            for(var t: number = 0; t < snake.trail.length; t++) {
-
+                
             }
         }
         return 

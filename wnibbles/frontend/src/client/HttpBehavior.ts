@@ -24,7 +24,7 @@ export class HttpBehavior implements ISnakeBehavior {
                 "ticks": snake.ticks,
                 "trail": snake.trail,
             };
-            var payloadSnakes: Array<object> = [];
+            let payloadSnakes: Array<object> = [];
             snakes.forEach( function( s ) {
                 payloadSnakes.push({
                     "id": s.id,

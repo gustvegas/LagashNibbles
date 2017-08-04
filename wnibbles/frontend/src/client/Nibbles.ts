@@ -1,5 +1,5 @@
 //import * as Enumerable from 'linq';
-var Enumerable = require('linq');
+const Enumerable = require('linq');
 
 import {Pos} from './Pos';
 import {Vector} from './Vector';
@@ -36,7 +36,7 @@ export class Nibbles {
     }
 
     shuffle<T>(array: Array<T>) : Array<T> {
-        var currentIndex = array.length, temporaryValue, randomIndex;
+        let currentIndex = array.length, temporaryValue, randomIndex;
 
         // While there remain elements to shuffle...
         while (0 !== currentIndex) {
@@ -82,7 +82,7 @@ export class Nibbles {
         let spaceAreas = new Array<SpaceArea>();
         let area = new SpaceArea(this.space.topX, this.space.topY);
         spaceAreas.push(area);
-        for(var i = 2 ; i <= this.snakes.length; i++ ) {
+        for(let i = 2 ; i <= this.snakes.length; i++ ) {
             let listq = Enumerable.from(spaceAreas);
             area = listq.orderByDescending( t => { return t.x * t.y; } ).first();
             let areaIndex = spaceAreas.findIndex( (val: SpaceArea) => {
@@ -103,7 +103,7 @@ export class Nibbles {
 
         // Transpone areas al space
         let curX = 0, curY = 0;
-        for(var i = 0; i < spaceAreas.length; i++) {
+        for(let i = 0; i < spaceAreas.length; i++) {
             if( curX + spaceAreas[i].x > this.space.topX) {
                 curX = 0;
                 curY += spaceAreas[i].y;
@@ -111,8 +111,8 @@ export class Nibbles {
                 curY = 0;
                 curX += spaceAreas[i].x;
             }
-            var topX = curX + spaceAreas[i].x;
-            var topY = curY + spaceAreas[i].y;
+            let topX = curX + spaceAreas[i].x;
+            let topY = curY + spaceAreas[i].y;
 
             // Setea las cordenadas en SpaceArea
             spaceAreas[i].spaceX = curX; 
@@ -156,7 +156,7 @@ export class Nibbles {
             this.ticks++;
             let directions: Array<Promise<Direction>> = new Array<Promise<Direction>>();
 
-            var newList = this.shuffle(this.snakes);
+            let newList = this.shuffle(this.snakes);
             for(let i: number = 0; i < newList.length; i++) {
                 let snake = newList[i];
                 snake.ticks = this.ticks;

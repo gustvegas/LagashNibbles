@@ -97,9 +97,9 @@ export class NextMoveRoute extends BaseRoute {
     let topy: number = 5;
 
     let map: number[][] = [];
-    for(var i:number = 0; i < topx; i++) {
+    for(let i:number = 0; i < topx; i++) {
         map[i] = [];
-        for(var j: number = 0; j< topy; j++) {
+        for(let j: number = 0; j< topy; j++) {
             map[i][j] = 0;
         }
     }

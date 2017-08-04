@@ -11,7 +11,7 @@ let nibbles: Nibbles;
 let started: boolean = false;
 let BLOCK_SIZE = 10;
 
-var sketch = function(p) {
+const sketch = function(p) {
     let drawName : boolean = true;
 
     p.setup = function() {
@@ -108,7 +108,7 @@ $(document).ready(()=>{
         canvas.parent('board');
         nibbles = new Nibbles(spacex, spacey);
         nibbles.clearSnakes();
-        for(var i = 0; i < endpoints.endpoints.length; i++ ) {
+        for(let i = 0; i < endpoints.endpoints.length; i++ ) {
             let endpoint = endpoints.endpoints[i];
 
             let checked = $("#endpoints input:checked").toArray();

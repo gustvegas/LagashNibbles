@@ -16,7 +16,7 @@ export class DummyBehavior implements ISnakeBehavior {
                 let aroundEmpty: boolean = true;
                 // for(let i=-1; (i < 2) && aroundEmpty; i++) {
                 //     for(let j=-1; (j < 2) && aroundEmpty; j++) {
-                //         var newPos: Pos = new Pos();
+                //         let newPos: Pos = new Pos();
                 //         newPos.x = pos.x+i;
                 //         newPos.y = pos.y+j;
                 //         if(newPos.isValidInBounds(space)) {
@@ -27,8 +27,8 @@ export class DummyBehavior implements ISnakeBehavior {
                 //         }
                 //     }		
                 // }
-                for(var i = 0; i < snakes.length; i++) {
-                    var other = snakes[i];
+                for(let i = 0; i < snakes.length; i++) {
+                    let other = snakes[i];
                     if(other.id == snake.id) {
                         continue;
                     }
