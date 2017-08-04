@@ -7,6 +7,9 @@ module.exports = function(grunt) {
             options: {
                 stderr: true
             },
+            install: {
+                command: ['cd frontend', 'npm install', 'cd ..', 'cd nibbleAppTS', 'npm install', 'cd ..', 'cd nibbleAppjS', 'npm install'].join('&&'),
+            },
             buildFrontEnd: {
                 command: ['cd frontend', 'grunt'].join('&&'),
             },
@@ -34,6 +37,7 @@ module.exports = function(grunt) {
     grunt.registerTask('default', [
         'shell:buildFrontEnd', 
         'shell:buildNibbleTS']);
+    grunt.registerTask('install', ['shell:install']);
     grunt.registerTask('build', ['shell:build']);
     grunt.registerTask('run', [ 
         'shell:buildFrontEnd', 
