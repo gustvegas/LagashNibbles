@@ -9,4 +9,4 @@ COPY package.json package-lock.json ./
 RUN npm install
 
 EXPOSE 9000
-CMD [ "node", "./bin/www" ]
+CMD [ "node", "./bin/www.js" ]

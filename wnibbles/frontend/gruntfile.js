@@ -73,7 +73,7 @@ module.exports = function(grunt) {
     },
     nodemon: {
       dev: {
-        script: './bin/www',
+        script: './bin/www.js',
         options: {
           nodeArgs: ['-inspect']
         }

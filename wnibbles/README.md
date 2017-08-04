@@ -26,7 +26,7 @@ La definicion en Swagger del API que debe implementarse es parte del código, co
  - `snakes`: Todas las serpientes que participan del juego (incluso la que debe ser controlada).
 
 ### `snake`
-Una serpiente tiene un identificador numérico único (`id`), un vector que representa la posición de su cabeza (`x`, `y`) y la dirección (`direction`) en la que se está desplazando. A su vez se informa el largo total de la serpiente (`length`), la cantidad de turnos que ha sobrevivido (`ticks`) y un listado con todos los cambios de dirección que ha hecho la serpiente (`trail`). La información que se encuentra en trail está presente en `space`, indicando qué serpiente se encuentra en cada casilla.
+Una serpiente tiene un identificador numérico único (`id`), un vector que representa la posición de su cabeza (`x`, `y`) y la dirección (`direction`) en la que se está desplazando. A su vez se informa el largo total de la serpiente (`length`), la cantidad de turnos que ha sobrevivido (`ticks`) y un listado con todos los cambios de dirección que ha hecho la serpiente (`trail`). La información que se encuentra en trail está presente en `space`, indicando qué serpiente se encuentra en cada casilla. **Importante:** Tener en cuenta que en el array `trail` el movimiento más reciente está en el último elemento y el siguiente en el anterior, etc, nada que `Array.prototype.reverse()` no pueda resolver. 
 ### `space`
 Es la información del espacio de juego, el tamaño del espacio (`topX`, `topY`) y un mapa (`map`) con el espacio de juego en dos dimensiones donde cada elemento de la matrix es un valor 0 (cero) si se encuentra vacío, o el id de la serpiente que se encuentra en dicho casilleto.
 ### `snakes`
@@ -40,11 +40,15 @@ El método deve devolver la nueva dirección que puede ser uno de los siguientes
 
  Dentro del proyecto `frontend` se encuentra un archivo `public/endpoints.json` donde se puede registrar el *endpoint* y ya se puede comenzar a jugar. El nombre de la serpiente puede ser Emoji y este se dibujará.
 
- Para facilitar la ejecución y evitar la instalación de dependencias, está distribuido como containers de Docker, y para levantar todo el ejemplo, se utiliza *docker-compose*.  Es importante tener instalado Docker en la máquina de desarrollo para acelerar el despliegue. También es necesario tener NodeJS y Grunt instalado en la máquina para poder ejecutar los comandos de compilación y deployment. Una vez instalado NodeJS, para instalar Grunt ejecutar en la consola, en cualquier directorio:
+ Para facilitar la ejecución y evitar la instalación de dependencias, está distribuido como containers de [Docker](http://www.docker.com/), y para levantar todo el ejemplo, se utiliza *docker-compose*.  Es importante tener instalado Docker en la máquina de desarrollo para acelerar el despliegue. También es necesario tener [NodeJS](http://nodejs.org/) y [Grunt](https://gruntjs.com) instalado en la máquina para poder ejecutar los comandos de compilación y deployment. Instalar **Docker** y **NodeJS** después, pueden instalar Grunt ejecutando en la consola, en cualquier directorio:
 
  `npm install -g grunt-cli`
 
- En la consola puede ejecutarse el siguiente comando, el directorio que contiene el archivo `docker-compose.yml` para compilar la solución:
+Para instalar todas las dependencias de cada uno de los proyectos, se debe usar la tarea definida en el proyecto raíz:
+
+`grunt install`
+
+En la consola puede ejecutarse el siguiente comando, el directorio que contiene el archivo `docker-compose.yml` para compilar la solución:
 
  `grunt`
 
@@ -52,21 +56,25 @@ Una vez compilada la solución, se pueden crear los contenedores mediante la eje
 
 `grunt build`
 
-A continuación para poner a funcionar los contenedores se cuenta con el comando:
+El comando build demora unos segundos dado que prepara las imágenes de Docker necesarias para correr el juego y los ejemplos disponibles. Esto es necesario solo una vez o cada que vez que se modifique el `package.json` del ejemplo. 
+
+Para poner a funcionar los contenedores se cuenta con el comando:
 
 `grunt run`
 
-Una vez iniciados los contenedores se puede apuntar el navegador a la dirección `http://localhost:9090/` [Lagash Nibbles](http://localhost:9090/" target="_blank).
+Una vez iniciados los contenedores se puede apuntar el navegador a la dirección `http://localhost:9090/` [Lagash Nibbles](http://localhost:9090/).
 
 Para limpiar el entorno (imágenes de docker creadas, contenedores, etc) se cuenta con el comando: 
 
-`grunt down`
+`grunt stop`
 
 Si están programando y cambiando el código pueden ejecutar más rápidamente el entorno compilando y reiniciando los contenedores con el comando:
 
 `grunt rundev`
 
-Nota: El entorno asume que los puertos 9090, 9091 y 9092 se encuentran libres, si esto no fuera así, se puede hacer el cambio en el archivo `docker-compose.yml` en la sección `ports`.
+*Nota*: El entorno asume que los puertos 9090, 9091 y 9092 se encuentran libres, si esto no fuera así, se puede hacer el cambio en el archivo `docker-compose.yml` en la sección `ports`.
+
+**Importante** van a tener que pasar un `Dockerfile` junto con su código, porque cada participante va a ejectuar como un microservicio, asegúrense que esté funcionando dentro de Docker. Cada container tiene un límite de memoria para que nadie se haga el vivo, si necesitan más memoria avisen. El ambiente de desarrollo está seteado tal como se va a ejecutar.
 
  ## El código fuente del DummyBehavior en TypeScript
 
@@ -139,3 +147,5 @@ Para finalizar se crea un objeto con la dirección seleccionada, para ser enviad
     //render json
     this.json(req, res, payload);
 ```
+
+Mucha suerte a todos los participantes. Happy coding y que la fuerza esté con cada uno.
