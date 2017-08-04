@@ -1,9 +1,0 @@
-{
-  "generator-java": {
-    "title": "jnibbles",
-    "description": "",
-    "author": "DiegoG",
-    "email": "diegog@lagash.com",
-    "namespace": "org.lagash"
-  }
-}

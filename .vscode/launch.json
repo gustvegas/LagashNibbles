@@ -1,23 +1,14 @@
 {
+    // Use IntelliSense to learn about possible Node.js debug attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
         {
-            "name": ".NET Core Launch (console)",
-            "type": "coreclr",
-            "request": "launch",
-            "preLaunchTask": "build",
-            "program": "${workspaceRoot}/Nibbles/bin/Debug/netcoreapp1.1/Nibbles.dll",
-            "args": [],
-            "cwd": "${workspaceRoot}/Nibbles",
-            "console": "internalConsole",
-            "stopAtEntry": false,
-            "internalConsoleOptions": "openOnSessionStart"
-        },
-        {
-            "name": ".NET Core Attach",
-            "type": "coreclr",
+            "type": "node",
             "request": "attach",
-            "processId": "${command:pickProcess}"
+            "name": "Attach",
+            "port": 9229
         }
     ]
 }

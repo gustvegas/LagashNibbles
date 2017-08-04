@@ -1,9 +1,0 @@
-{
-  "watch": ["src", "views", "public"],
-  "ignore": [
-    ".git",
-    "node_modules/**/node_modules"
-  ],
-  "ext": "ts pug css",
-  "exec": "grunt && node --inspect"
-}
