@@ -156,7 +156,6 @@ export class Nibbles {
             this.ticks++;
             let directions: Array<Promise<Direction>> = new Array<Promise<Direction>>();
 
-            let newSpace = this.space.createSpace(this.snakes);
             let newList = this.shuffle(this.snakes);
             for(let i: number = 0; i < newList.length; i++) {
                 let snake = newList[i];
