@@ -66,7 +66,7 @@ export class Nibbles {
             this.snakes = new Array<Snake>();
         }
         let snake = new Snake(id);
-        if(name !== null && name !== ""){
+        if(name != null && name != ""){
             snake.name = name;
         }
         snake.color = color;
@@ -157,7 +157,6 @@ export class Nibbles {
             let directions: Array<Promise<Direction>> = new Array<Promise<Direction>>();
 
             let newSpace = this.space.createSpace(this.snakes);
-
             let newList = this.shuffle(this.snakes);
             for(let i: number = 0; i < newList.length; i++) {
                 let snake = newList[i];

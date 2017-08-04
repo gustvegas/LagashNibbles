@@ -33,7 +33,7 @@ export class Snake extends Vector {
         let newFirst = first.moveNewDirection(first.direction);
         first.x = newFirst.x;
         first.y = newFirst.y;
-        if( second !== null && 
+        if( second != null && 
             first.x === second.x && first.y === second.y) {
             this.trail.splice(0,1);
         }

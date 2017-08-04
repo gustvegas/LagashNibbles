@@ -37,7 +37,7 @@ const sketch = function(p) {
             p.strokeWeight(1);
             if(nibbles.hit && 
                (nibbles.loser.id === snake.id ||
-                (nibbles.loser2 !== null && nibbles.loser2.id === snake.id))) {
+                (nibbles.loser2 != null && nibbles.loser2.id === snake.id))) {
                 let col = p.lerpColor(p.color(snake.color), p.color('#000000'), .5);
                 p.stroke(col);
             }
@@ -54,7 +54,7 @@ const sketch = function(p) {
 
                 p.strokeWeight(1);
                 p.rect(vec.x * BLOCK_SIZE, vec.y * BLOCK_SIZE, BLOCK_SIZE-1, BLOCK_SIZE-1);
-                if(pvec !== null) {
+                if(pvec != null) {
                     p.strokeWeight(BLOCK_SIZE);
                     p.line(
                         (vec.x * BLOCK_SIZE) + 5, (vec.y * BLOCK_SIZE) + 5, 
@@ -64,7 +64,7 @@ const sketch = function(p) {
             }
             if(drawName) {
                 p.stroke('#000000');
-                if(snake.direction == Direction.Up || snake.direction == Direction.Down) {
+                if(snake.direction === Direction.Up || snake.direction === Direction.Down) {
                     p.text(snake.name, (snake.x * BLOCK_SIZE), (snake.y * BLOCK_SIZE) + 10);
                 }else{
                     p.text(snake.name, (snake.x * BLOCK_SIZE) - 5, (snake.y * BLOCK_SIZE) + 10);                    
@@ -77,7 +77,7 @@ const sketch = function(p) {
             $('#loser-id').css('background-color', nibbles.loser.color);
             $('#loser-id').text(nibbles.loser.id);
             $('#loser-name').text(nibbles.loser.name);
-            if(nibbles.loser2 !== null) {
+            if(nibbles.loser2 != null) {
                 $('#loser-2-id').css('background-color', nibbles.loser2.color);
                 $('#loser-2-id').text(nibbles.loser2.id);
                 $('#loser-2-name').text(nibbles.loser2.name);
@@ -113,9 +113,9 @@ $(document).ready(()=>{
 
             let checked = $("#endpoints input:checked").toArray();
             let elem = checked.find( (e) => {
-                return $(e).val() === endpoint.id;
+                return $(e).val() == endpoint.id;
             });
-            if(elem !== null) {
+            if(elem != null) {
                 nibbles.addSnake(i+1, 
                     endpoint.name,
                     endpoint.color, 

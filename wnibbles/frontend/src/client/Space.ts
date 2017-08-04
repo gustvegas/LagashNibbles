@@ -22,29 +22,28 @@ export class Space {
     }
 
     createSpace(snakes: Array<Snake>): Space {
-        // let space = new Space(this.topX, this.topY);
-
-        // for(let i:number = 0; i < snakes.length; i++) {
-        //     let snake = snakes[i];
-    
-        //     space.map[snake.x][snake.y] = snake.id;
-        //     let lastVec: Vector = snake;
-        //     for(let t: number = 0; t < snake.trail.length; t++) {
-        //         let trail = snake.trail[t];
-
-        //         let dist = Math.abs((lastVec.x === trail.x) ? 
-        //             (lastVec.y - trail.y) : 
-        //             (lastVec.x - trail.x));
-        //         for(let d = 0; d < dist; d++) {
-        //             // if( lastVec.x === trail.x ) {
-        //             //     space.map[snake.x][snake.y+d] = snake.id;
-        //             // }else if(lastVec.y === trail.y) {
-        //             //     space.map[snake.x+d][snake.y] = snake.id;
-        //             // }
-        //         }
-        //         lastVec = trail;
-        //     }
-        // }
-        // return null;
+        let space = new Space(this.topX, this.topY);
+        for(let i:number = 0; i < snakes.length; i++) {
+            let snake = snakes[i];
+            space.map[snake.x][snake.y] = snake.id;
+            let lastVec: Vector = snake;
+            for(let t: number = snake.trail.length-1; t >= 0; t--) {
+                let trail = snake.trail[t];
+                let dist = (lastVec.x === trail.x) ? 
+                    (lastVec.y - trail.y) : 
+                    (lastVec.x - trail.x);
+                let sign = (dist < 0) ? -1 : 1;
+                dist = Math.abs(dist);
+                for(let d = 1; d <= dist; d++) {
+                    if( lastVec.x === trail.x ) {
+                        space.map[lastVec.x][lastVec.y-(d*sign)] = snake.id;
+                    }else if(lastVec.y === trail.y) {
+                        space.map[lastVec.x-(d*sign)][lastVec.y] = snake.id;
+                    }
+                }
+                lastVec = trail;
+            }
+        }
+        return space;
     }
 }
