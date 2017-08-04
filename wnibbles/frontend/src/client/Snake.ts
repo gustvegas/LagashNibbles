@@ -33,8 +33,8 @@ export class Snake extends Vector {
         let newFirst = first.moveNewDirection(first.direction);
         first.x = newFirst.x;
         first.y = newFirst.y;
-        if( second != null && 
-            first.x == second.x && first.y == second.y) {
+        if( second !== null && 
+            first.x === second.x && first.y === second.y) {
             this.trail.splice(0,1);
         }
         return first;
@@ -52,7 +52,7 @@ export class Snake extends Vector {
     willHitNextStep(space:Space):boolean {
         let pos = this.moveNewDirection(this.direction);
         if(pos.isValidInBounds(space)
-            && (space.map[pos.x][pos.y] == space.EMPTY)) {
+            && (space.map[pos.x][pos.y] === space.EMPTY)) {
             return false;
         }
         return true;
@@ -67,7 +67,7 @@ export class Snake extends Vector {
     }
 
     changeDirection(direction: Direction) {
-        if(this.direction != direction || this.trail.length == 0) {
+        if(this.direction !== direction || this.trail.length === 0) {
             let vec = new Vector();
             vec.x = this.x;
             vec.y = this.y;

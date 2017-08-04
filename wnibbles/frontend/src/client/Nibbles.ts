@@ -66,7 +66,7 @@ export class Nibbles {
             this.snakes = new Array<Snake>();
         }
         let snake = new Snake(id);
-        if(name != null && name != ""){
+        if(name !== null && name !== ""){
             snake.name = name;
         }
         snake.color = color;
@@ -86,7 +86,7 @@ export class Nibbles {
             let listq = Enumerable.from(spaceAreas);
             area = listq.orderByDescending( t => { return t.x * t.y; } ).first();
             let areaIndex = spaceAreas.findIndex( (val: SpaceArea) => {
-                return (val.x * val.y == area.x * area.y);
+                return ((val.x * val.y) === (area.x * area.y));
             });
             spaceAreas.splice(areaIndex,1);
 
@@ -156,6 +156,8 @@ export class Nibbles {
             this.ticks++;
             let directions: Array<Promise<Direction>> = new Array<Promise<Direction>>();
 
+            let newSpace = this.space.createSpace(this.snakes);
+
             let newList = this.shuffle(this.snakes);
             for(let i: number = 0; i < newList.length; i++) {
                 let snake = newList[i];
@@ -178,11 +180,11 @@ export class Nibbles {
                             idx = snake.willHitNextStepInfo(this.space);
                             this.hit = true;
                             this.hitTarget = idx;
-                            if(idx != -1 && idx != this.loser.id) {
+                            if(idx !== -1 && idx !== this.loser.id) {
                                 let newPos = this.loser.moveNewDirection(this.loser.direction);
-                                let otherHit = this.snakes.find( (s) => { return s.id == idx; });
-                                if(otherHit.x == newPos.x &&
-                                   otherHit.y == newPos.y) {
+                                let otherHit = this.snakes.find( (s) => { return s.id === idx; });
+                                if(otherHit.x === newPos.x &&
+                                   otherHit.y === newPos.y) {
                                     this.loser2 = otherHit;
                                 }
                             }

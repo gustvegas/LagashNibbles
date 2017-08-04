@@ -20,8 +20,8 @@ export class DummyBehavior implements ISnakeBehavior {
                 //         newPos.x = pos.x+i;
                 //         newPos.y = pos.y+j;
                 //         if(newPos.isValidInBounds(space)) {
-                //             if((space.map[newPos.x][newPos.y] != 0 && 
-                //                 space.map[newPos.x][newPos.y] != snake.id)) {
+                //             if((space.map[newPos.x][newPos.y] !== 0 && 
+                //                 space.map[newPos.x][newPos.y] !== snake.id)) {
                 //                 aroundEmpty = false;
                 //             }
                 //         }
@@ -29,7 +29,7 @@ export class DummyBehavior implements ISnakeBehavior {
                 // }
                 for(let i = 0; i < snakes.length; i++) {
                     let other = snakes[i];
-                    if(other.id == snake.id) {
+                    if(other.id === snake.id) {
                         continue;
                     }
                     if( other.x > pos.x - 2 && 
@@ -55,7 +55,7 @@ export class DummyBehavior implements ISnakeBehavior {
                 if(!pos.isValidInBounds(space)) {
                     continue;
                 }
-                if(space.map[pos.x][pos.y] != space.EMPTY) {
+                if(space.map[pos.x][pos.y] !== space.EMPTY) {
                     continue;
                 }
                 return resolve(dir);

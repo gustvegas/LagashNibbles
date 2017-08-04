@@ -100,7 +100,7 @@ Se guarda la dirección actual en la variable `newDirection` y se llama al méto
 Se utiliza el método de soporte `isValidInBounds()` para determinar si la nueva posición está dentro de los límites del espacio de juego. Y luego se procede a verificar que en dicha posición no haya otro jugador, mediante el uso de la información de `space.map[x][y]`, si el valor está en 0, quiere decir que el espacio está libre. Si así fuera, decide mantener la misma dirección.
 ```typescript
     if(pos.isValidInBounds(space)
-        && (space.map[pos.x][pos.y] == space.EMPTY)) {
+        && (space.map[pos.x][pos.y] === space.EMPTY)) {
         newDirection = snake.direction;                
     }else{
 ```

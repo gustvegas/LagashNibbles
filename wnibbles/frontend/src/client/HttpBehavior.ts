@@ -54,7 +54,7 @@ export class HttpBehavior implements ISnakeBehavior {
                 type: 'POST',
                 success: function (result) {
                     let newDir: Direction = (<any>Direction)[result.direction];
-                    if (result.isOk == false) console.log(result);
+                    if (result.isOk === false) console.log(result);
                     return resolve(newDir);
                 }
             });

@@ -147,7 +147,7 @@ export class NextMoveRoute extends BaseRoute {
     // Si no me choco adelante, sigo igual
     let pos = snake.moveNew();
     if(pos.isValidInBounds(space)
-        && (space.map[pos.x][pos.y] == space.EMPTY)) {
+        && (space.map[pos.x][pos.y] === space.EMPTY)) {
         newDirection = snake.direction;                
     }else{
       //Busco nueva dirección clockwise para no chocarme
@@ -160,7 +160,7 @@ export class NextMoveRoute extends BaseRoute {
           if(!pos.isValidInBounds(space)) {
               continue;
           }
-          if(space.map[pos.x][pos.y] != space.EMPTY) {
+          if(space.map[pos.x][pos.y] !== space.EMPTY) {
               continue;
           }
           newDirection = dir;
