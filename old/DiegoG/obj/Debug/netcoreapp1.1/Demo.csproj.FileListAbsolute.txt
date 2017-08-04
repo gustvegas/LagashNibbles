@@ -1,0 +1,8 @@
+/Users/diegog/Source/nibbles/DiegoG/bin/Debug/netcoreapp1.1/Demo.deps.json
+/Users/diegog/Source/nibbles/DiegoG/obj/Debug/netcoreapp1.1/Demo.AssemblyInfo.cs
+/Users/diegog/Source/nibbles/DiegoG/bin/Debug/netcoreapp1.1/Demo.dll
+/Users/diegog/Source/nibbles/DiegoG/bin/Debug/netcoreapp1.1/Demo.pdb
+/Users/diegog/Source/nibbles/DiegoG/bin/Debug/netcoreapp1.1/Nibbles.dll
+/Users/diegog/Source/nibbles/DiegoG/bin/Debug/netcoreapp1.1/Nibbles.pdb
+/Users/diegog/Source/nibbles/DiegoG/obj/Debug/netcoreapp1.1/Demo.dll
+/Users/diegog/Source/nibbles/DiegoG/obj/Debug/netcoreapp1.1/Demo.pdb

@@ -1,0 +1,50 @@
+html
+  head
+    title="Lagash Nibbles Contest"
+    link(rel='stylesheet', href='/css/main.css')
+    script(src="/js/jquery.js")
+    script(src="/js/p5/p5.js")
+    script(src='/js/client.js')
+  body
+    header
+      img(src='https://www.lagash.com/img/logo.png', alt='Lagash Logo')#lagashLogo
+      h1="Nibbles Contest"
+    div(id='endpoints-data', class='hidden', data-endpoints=endpoints)
+    div(id='container').container
+      div(id='board').board
+      div(id='panel').panel
+        ul#endpoints
+          li
+            input(type="checkbox", name='all', id='all')
+            span All
+          each endpoint in endpoints.endpoints
+            li(style={'background-color': endpoint.color})
+              input(type="checkbox", name=endpoint.name, id=endpoint.name, value=endpoint.id)
+              if(endpoint.name != "")
+                span=endpoint.name + " : " + endpoint.url
+              else
+                span="🤦 : " + endpoint.url
+        div(id='loser').loser
+          span Loser:
+          span#loser-id
+          span#loser-name
+          br
+          span Loser:
+          span#loser-2-id
+          span#loser-2-name
+          br
+          span Hit:
+          span#loser-hit
+          br
+          span Framerate:
+          select(name='framerate' id='framerate')
+            option(value='10') 10 fps
+            option(value='20') 20 fps
+            option(value='30') 30 fps
+            option(value='40') 40 fps
+          br
+          span Size:
+          input(type='text', name='topX', id='topX', value='30')          
+          input(type='text', name='topY', id='topY', value='30')          
+          br
+          input(type='button', id='start', value='Start').button

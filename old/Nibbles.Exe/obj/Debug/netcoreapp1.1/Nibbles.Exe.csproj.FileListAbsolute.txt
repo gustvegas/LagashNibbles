@@ -1,0 +1,12 @@
+/Users/diegog/Source/nibbles/Nibbles.Exe/bin/Debug/netcoreapp1.1/Nibbles.Exe.deps.json
+/Users/diegog/Source/nibbles/Nibbles.Exe/bin/Debug/netcoreapp1.1/Nibbles.Exe.runtimeconfig.json
+/Users/diegog/Source/nibbles/Nibbles.Exe/bin/Debug/netcoreapp1.1/Nibbles.Exe.runtimeconfig.dev.json
+/Users/diegog/Source/nibbles/Nibbles.Exe/bin/Debug/netcoreapp1.1/Nibbles.Exe.dll
+/Users/diegog/Source/nibbles/Nibbles.Exe/bin/Debug/netcoreapp1.1/Nibbles.Exe.pdb
+/Users/diegog/Source/nibbles/Nibbles.Exe/bin/Debug/netcoreapp1.1/Demo.dll
+/Users/diegog/Source/nibbles/Nibbles.Exe/bin/Debug/netcoreapp1.1/Nibbles.dll
+/Users/diegog/Source/nibbles/Nibbles.Exe/bin/Debug/netcoreapp1.1/Nibbles.pdb
+/Users/diegog/Source/nibbles/Nibbles.Exe/bin/Debug/netcoreapp1.1/Demo.pdb
+/Users/diegog/Source/nibbles/Nibbles.Exe/obj/Debug/netcoreapp1.1/Nibbles.Exe.AssemblyInfo.cs
+/Users/diegog/Source/nibbles/Nibbles.Exe/obj/Debug/netcoreapp1.1/Nibbles.Exe.dll
+/Users/diegog/Source/nibbles/Nibbles.Exe/obj/Debug/netcoreapp1.1/Nibbles.Exe.pdb

@@ -1,0 +1,50 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v1.1",
+    "signature": "da39a3ee5e6b4b0d3255bfef95601890afd80709"
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v1.1": {
+      "nibbles.exe/1.0.0": {
+        "dependencies": {
+          "Demo": "1.0.0",
+          "Nibbles": "1.0.0"
+        },
+        "runtime": {
+          "Nibbles.Exe.dll": {}
+        }
+      },
+      "demo/1.0.0": {
+        "dependencies": {
+          "Nibbles": "1.0.0"
+        },
+        "runtime": {
+          "Demo.dll": {}
+        }
+      },
+      "nibbles/1.0.0": {
+        "runtime": {
+          "Nibbles.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "nibbles.exe/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "demo/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "nibbles/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

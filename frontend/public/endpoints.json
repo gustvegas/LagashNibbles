@@ -1,0 +1,28 @@
+{
+    "endpoints": [
+        {
+            "id": 1,
+            "name": "👾",
+            "color": "red",
+            "url": "http://localhost:9091/nextMove"
+        },
+        {
+            "id": 2,
+            "name": "B",
+            "color": "blue",
+            "url": "http://localhost:9092/nextMove"
+        },
+        {
+            "id": 3,
+            "name": "",
+            "color": "green",
+            "url": "http://localhost:9091/nextMove"
+        },
+        {
+            "id": 4,
+            "name": "🐛",
+            "color": "yellow",
+            "url": "http://localhost:9092/nextMove"
+        }
+    ]
+}
