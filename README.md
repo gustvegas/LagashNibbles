@@ -46,6 +46,10 @@ El método deve devolver la nueva dirección que puede ser uno de los siguientes
 
 Para instalar todas las dependencias de cada uno de los proyectos, se debe usar la tarea definida en el proyecto raíz:
 
+`npm install`
+
+, y luego:
+
 `grunt install`
 
 En la consola puede ejecutarse el siguiente comando, el directorio que contiene el archivo `docker-compose.yml` para compilar la solución:
