@@ -64,4 +64,4 @@ dist/
 *.tmp.txt
 tsjs/
 
-
+obj/
